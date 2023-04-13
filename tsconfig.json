@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
+    "outDir": "dist",
     "target": "ESNext",
     "useDefineForClassFields": true,
     "module": "ESNext",
-    "lib": ["ESNext", "DOM"],
+    "lib": ["ESNext"],
     "moduleResolution": "Node",
     "strict": true,
     "resolveJsonModule": true,
@@ -15,5 +16,6 @@
     "noImplicitReturns": true,
     "skipLibCheck": true
   },
-  "include": ["src"]
+  "include": ["src/libs", "src/**/*.d.ts"],
+  "exclude": ["node_modules", "dist"]
 }
