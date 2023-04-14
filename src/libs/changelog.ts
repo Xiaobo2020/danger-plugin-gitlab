@@ -1,4 +1,4 @@
-import getLog from "../utils/getLog";
+import { getLog } from "../utils";
 
 const DEFAULT_CHECK_MESSAGE =
   "This is a trival MR and no CHANGELOG changes required.";

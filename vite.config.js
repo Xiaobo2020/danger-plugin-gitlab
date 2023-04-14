@@ -9,9 +9,14 @@ export default defineConfig({
     emptyOutDir: false,
     lib: {
       formats: ["es", "cjs"],
-      entry: glob
-        .sync("src/libs/**/*.ts")
-        .map((file) => resolve(__dirname, file)),
+      entry: [
+        ...glob
+          .sync("src/libs/**/*.ts")
+          .map((file) => resolve(__dirname, file)),
+        ...glob
+          .sync("src/utils/**/*.ts")
+          .map((file) => resolve(__dirname, file)),
+      ],
     },
     rollupOptions: {
       output: {

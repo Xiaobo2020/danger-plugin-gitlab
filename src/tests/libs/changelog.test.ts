@@ -2,7 +2,7 @@ import { describe, it, beforeEach, expect, vi } from "vitest";
 import changelog from "../../libs/changelog";
 
 const mockLog = vi.fn();
-vi.mock("../utils/getLog", () => ({
+vi.mock("../../utils/getLog", () => ({
   default: () => mockLog,
 }));
 
