@@ -4,7 +4,7 @@ const DEFAULT_CHECK_MESSAGE =
   "This is a trival MR and no CHANGELOG changes required.";
 const DEFAULT_LOG_MESSAGE = "Please add a changelog entry for your changes.";
 
-type ChangelogOptions = {
+type Options = {
   filename?: string;
   logType?: "fail" | "warn" | "message";
   checkMessage?: string;
@@ -14,7 +14,7 @@ type ChangelogOptions = {
 /**
  * @description Check if CHANGELOG included in the merge request
  */
-const needChangelog = (options: ChangelogOptions = {}) => {
+const needChangelog = (options: Options = {}) => {
   const {
     filename = "changelog.md",
     logType = "warn",
