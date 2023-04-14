@@ -1,6 +1,4 @@
-const getFail = () => fail;
-const getWarn = () => warn;
-const getMessage = () => message;
+import { getFail, getMessage, getWarn } from "./getDangerModule";
 
 function getLogger(logType: "fail"): ReturnType<typeof getFail>;
 function getLogger(logType: "warn"): ReturnType<typeof getWarn>;

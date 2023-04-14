@@ -5,9 +5,11 @@ const mockFail = vi.fn();
 const mockWarn = vi.fn();
 const mockMessage = vi.fn();
 
-vi.stubGlobal("fail", mockFail);
-vi.stubGlobal("warn", mockWarn);
-vi.stubGlobal("message", mockMessage);
+vi.mock("../../utils/getDangerModule.ts", () => ({
+  getFail: () => mockFail,
+  getWarn: () => mockWarn,
+  getMessage: () => mockMessage,
+}));
 
 describe("getLogger", () => {
   it('should return fail function if logType is "fail"', () => {

@@ -1,4 +1,4 @@
-import { getLogger } from "../utils";
+import { getLogger, getDanger } from "../utils";
 
 const DEFAULT_CHECK_MESSAGE =
   "This is a trival MR and no CHANGELOG changes required.";
@@ -21,12 +21,13 @@ const needChangelog = (options: Options = {}) => {
     checkMessage = DEFAULT_CHECK_MESSAGE,
     logMessage = DEFAULT_LOG_MESSAGE,
   } = options;
+
   const {
     git: { modified_files: modifiedFiles },
     gitlab: {
       mr: { description },
     },
-  } = danger;
+  } = getDanger();
 
   const hasChangelog = modifiedFiles.includes(filename);
   const isTrival = description.includes(`[x] ${checkMessage}`);

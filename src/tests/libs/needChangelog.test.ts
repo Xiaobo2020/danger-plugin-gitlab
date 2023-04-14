@@ -1,19 +1,16 @@
-import { describe, it, beforeEach, expect, vi } from "vitest";
+import { describe, it, expect, vi, Mock } from "vitest";
 import needChangelog from "../../libs/needChangelog";
+import { getDanger } from "../../utils";
 
-const mockLog = vi.fn();
-vi.mock("../../utils/getLogger", () => ({
-  default: () => mockLog,
+const mockLogger = vi.fn();
+vi.mock("../../utils", () => ({
+  getLogger: () => mockLogger,
+  getDanger: vi.fn(),
 }));
 
 describe("needChangelog", () => {
-  beforeEach(() => {
-    // @ts-ignore
-    global.danger = undefined;
-  });
-
   it("should not call log function when changelog.md exists.", () => {
-    global.danger = {
+    (getDanger as Mock).mockReturnValue({
       // @ts-ignore
       git: {
         modified_files: ["a.txt", "changelog.md"],
@@ -24,13 +21,13 @@ describe("needChangelog", () => {
           description: "",
         },
       },
-    };
+    });
     needChangelog();
-    expect(mockLog).not.toHaveBeenCalled();
+    expect(mockLogger).not.toHaveBeenCalled();
   });
 
   it("should not call log function when check message is checked", () => {
-    global.danger = {
+    (getDanger as Mock).mockReturnValue({
       // @ts-ignore
       git: {
         modified_files: ["a.txt"],
@@ -42,13 +39,13 @@ describe("needChangelog", () => {
             "[x] This is a trival MR and no CHANGELOG changes required.",
         },
       },
-    };
+    });
     needChangelog();
-    expect(mockLog).not.toHaveBeenCalled();
+    expect(mockLogger).not.toHaveBeenCalled();
   });
 
   it("should call log function when check message is not checked", () => {
-    global.danger = {
+    (getDanger as Mock).mockReturnValue({
       // @ts-ignore
       git: {
         modified_files: ["a.txt"],
@@ -60,8 +57,8 @@ describe("needChangelog", () => {
             "[ ] This is a trival MR and no CHANGELOG changes required.",
         },
       },
-    };
+    });
     needChangelog();
-    expect(mockLog).toHaveBeenCalled();
+    expect(mockLogger).toHaveBeenCalled();
   });
 });
