@@ -1,4 +1,4 @@
-import { getLog } from "../utils";
+import { getLogger } from "../utils";
 
 const DEFAULT_CHECK_MESSAGE =
   "This is a trival MR and no CHANGELOG changes required.";
@@ -32,7 +32,7 @@ const needChangelog = (options: ChangelogOptions = {}) => {
   const isTrival = description.includes(`[x] ${checkMessage}`);
 
   if (!isTrival && !hasChangelog) {
-    const log = getLog(logType as any);
+    const log = getLogger(logType as any);
     log(logMessage);
   }
 };

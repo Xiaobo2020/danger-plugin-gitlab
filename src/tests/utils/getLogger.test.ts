@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import getLog from "../../utils/getLog";
+import getLogger from "../../utils/getLogger";
 
 const mockFail = vi.fn();
 const mockWarn = vi.fn();
@@ -9,16 +9,16 @@ vi.stubGlobal("fail", mockFail);
 vi.stubGlobal("warn", mockWarn);
 vi.stubGlobal("message", mockMessage);
 
-describe("getLog", () => {
+describe("getLogger", () => {
   it('should return fail function if logType is "fail"', () => {
-    expect(getLog("fail")).toBe(mockFail);
+    expect(getLogger("fail")).toBe(mockFail);
   });
 
   it('should return message function if logType is "message"', () => {
-    expect(getLog("message")).toBe(mockMessage);
+    expect(getLogger("message")).toBe(mockMessage);
   });
 
   it('should return warn function if logType is "warn"', () => {
-    expect(getLog("warn")).toBe(mockWarn);
+    expect(getLogger("warn")).toBe(mockWarn);
   });
 });

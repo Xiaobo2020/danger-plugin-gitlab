@@ -1,1 +1,1 @@
-export { default as getLog } from "./getLog";
+export { default as getLogger } from "./getLogger";

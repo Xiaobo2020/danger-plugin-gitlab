@@ -2,10 +2,10 @@ const getFail = () => fail;
 const getWarn = () => warn;
 const getMessage = () => message;
 
-function getLog(logType: "fail"): ReturnType<typeof getFail>;
-function getLog(logType: "warn"): ReturnType<typeof getWarn>;
-function getLog(logType: "message"): ReturnType<typeof getMessage>;
-function getLog(
+function getLogger(logType: "fail"): ReturnType<typeof getFail>;
+function getLogger(logType: "warn"): ReturnType<typeof getWarn>;
+function getLogger(logType: "message"): ReturnType<typeof getMessage>;
+function getLogger(
   logType: "fail" | "warn" | "message"
 ):
   | ReturnType<typeof getFail>
@@ -16,4 +16,4 @@ function getLog(
   return getWarn();
 }
 
-export default getLog;
+export default getLogger;
