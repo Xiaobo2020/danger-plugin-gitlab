@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, Mock, beforeEach } from "vitest";
-import needDetailedDescription from "../../libs/needDetailedDescription";
+import { beforeEach, describe, expect, it, Mock, vi } from "vitest";
+import detailedDescription from "../../libs/detailedDescription";
 import { getDanger } from "../../utils";
 
 const mockLogger = vi.fn();
@@ -8,7 +8,7 @@ vi.mock("../../utils", () => ({
   getDanger: vi.fn(),
 }));
 
-describe("needDetailedDescription", () => {
+describe("detailedDescription", () => {
   beforeEach(() => {
     vi.resetAllMocks();
   });
@@ -22,7 +22,7 @@ describe("needDetailedDescription", () => {
         },
       },
     });
-    needDetailedDescription();
+    detailedDescription();
     expect(mockLogger).toHaveBeenCalled();
   });
 
@@ -35,7 +35,7 @@ describe("needDetailedDescription", () => {
         },
       },
     });
-    needDetailedDescription();
+    detailedDescription();
     expect(mockLogger).toHaveBeenCalled();
   });
 
@@ -48,7 +48,7 @@ describe("needDetailedDescription", () => {
         },
       },
     });
-    needDetailedDescription({ minLength: 10 });
+    detailedDescription({ minLength: 10 });
     expect(mockLogger).toHaveBeenCalled();
   });
 
@@ -62,7 +62,7 @@ describe("needDetailedDescription", () => {
       },
     });
     const logMessage = "This is log message.";
-    needDetailedDescription({ logMessage });
+    detailedDescription({ logMessage });
     expect(mockLogger).toHaveBeenCalledWith(logMessage);
   });
 });

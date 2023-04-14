@@ -1,4 +1,4 @@
-import { getLogger, getDanger } from "../utils";
+import { getDanger, getLogger } from "../utils";
 
 const DEFAULT_MIN_LENGTH = 5;
 const DEFAULT_LOG_MESSAGE =
@@ -13,7 +13,7 @@ type Options = {
 /**
  * @description Check if the description in the merge request detailed enough
  */
-const needDetailedDescription = (options: Options = {}) => {
+const detailedDescription = (options: Options = {}) => {
   const {
     logType = "message",
     minLength = DEFAULT_MIN_LENGTH,
@@ -41,4 +41,4 @@ const needDetailedDescription = (options: Options = {}) => {
   }
 };
 
-export default needDetailedDescription;
+export default detailedDescription;

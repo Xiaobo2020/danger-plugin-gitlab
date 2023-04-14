@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import getLogger from "../../utils/getLogger";
 
 const mockFail = vi.fn();

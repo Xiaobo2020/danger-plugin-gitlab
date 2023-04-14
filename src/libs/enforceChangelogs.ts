@@ -1,4 +1,4 @@
-import { getLogger, getDanger } from "../utils";
+import { getDanger, getLogger } from "../utils";
 
 const DEFAULT_CHECK_MESSAGE =
   "This is a trival MR and no CHANGELOG changes required.";
@@ -14,7 +14,7 @@ type Options = {
 /**
  * @description Check if CHANGELOG included in the merge request
  */
-const needChangelog = (options: Options = {}) => {
+const enforceChangelogs = (options: Options = {}) => {
   const {
     filename = "changelog.md",
     logType = "warn",
@@ -38,4 +38,4 @@ const needChangelog = (options: Options = {}) => {
   }
 };
 
-export default needChangelog;
+export default enforceChangelogs;

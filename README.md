@@ -10,16 +10,16 @@ npm install -D danger-plugin-gitlab
 
 ```javascript
 // ESModule
-import { needChangelog } from "danger-plugin-gitlab";
+import { enforceChangelogs } from "danger-plugin-gitlab";
 
 // or CommonJS
-const { needChangelog } = require("danger-plugin-gitlab");
+const { enforceChangelogs } = require("danger-plugin-gitlab");
 
-// use needChangelog with default options
-needChangelog();
+// use enforceChangelogs with default options
+enforceChangelogs();
 
 // just equal to
-needChangelog({
+enforceChangelogs({
   filename: "changelog.md",
   logType: "warn",
   checkMessage: "This is a trival MR and no CHANGELOG changes required.",
@@ -27,10 +27,29 @@ needChangelog({
 });
 ```
 
-## DONE
+## Features
 
-- [x] needChangelog
+### enforceChangelogs
 
-## TODO
+Make sure every change is recorded in the changelog.
 
-- [ ] ...
+```javascript
+enforceChangelogs({
+  filename: "changelog.md",
+  logType: "warn",
+  checkMessage: "This is a trival MR and no CHANGELOG changes required.",
+  logMessage: "Please add a changelog entry for your changes.",
+});
+```
+
+### detailedDescription
+
+Make sure each merge request has a detailed description.
+
+```javascript
+detailedDescription({
+  logType: "message",
+  minLength: 5,
+  logMessage: "Please provide a summary in the pull request description.",
+});
+```

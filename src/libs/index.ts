@@ -1,1 +1,2 @@
-export { default as needChangelog } from "./needChangelog";
+export { default as detailedDescription } from "./detailedDescription";
+export { default as enforceChangelogs } from "./enforceChangelogs";
