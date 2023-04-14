@@ -8,13 +8,14 @@
     "dev": "vite",
     "tsc": "tsc",
     "test": "vitest",
+    "coverage": "vitest run --coverage",
     "build": "npm run tsc && npm run build:libs && npm run build:types",
     "build:libs": "vite build",
-    "build:types": "tsc src/libs/*.ts --declaration --emitDeclarationOnly --declarationDir dist/",
-    "coverage": "vitest run --coverage",
+    "build:types": "tsc -p tsconfig.prod.json",
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@vitest/coverage-c8": "^0.30.1",
     "danger": "^11.2.6",
     "typescript": "^4.9.3",
     "vite": "^4.2.0",

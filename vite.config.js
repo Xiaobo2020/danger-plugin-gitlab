@@ -28,7 +28,7 @@ export default defineConfig({
     lib: {
       formats: ["es", "cjs"],
       entry: {
-        changelog: resolve(__dirname, "./src/libs/changelog.ts"),
+        "libs/changelog": resolve(__dirname, "./libs/changelog.ts"),
       },
     },
   },

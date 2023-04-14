@@ -10,12 +10,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
-    "noEmit": true,
+    "noEmit": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationDir": "dist"
   },
-  "include": ["src/libs", "src/**/*.d.ts"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["./libs", "./utils", "./types"]
 }
