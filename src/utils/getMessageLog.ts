@@ -1,12 +1,13 @@
-export type LogType = "fail" | "warn" | "message";
+const mappings = {
+  fail: fail,
+  warn: warn,
+  message: message,
+} as const;
 
-export default function getMessageLog(logType: LogType = "warn") {
-  switch (logType) {
-    case "fail":
-      return fail;
-    case "message":
-      return message;
-    default:
-      return warn;
-  }
+export type LogType = keyof typeof mappings;
+
+function getMessageLog<T extends LogType>(logType: T): (typeof mappings)[T] {
+  return mappings[logType] || mappings["warn"];
 }
+
+export default getMessageLog;

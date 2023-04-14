@@ -12,4 +12,7 @@ declare global {
   var fail: typeof _fail;
 }
 
-export {};
+declare var danger: typeof _danger;
+declare var message: typeof _message;
+declare var warn: typeof _warn;
+declare var fail: typeof _fail;

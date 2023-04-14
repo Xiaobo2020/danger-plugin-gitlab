@@ -4,9 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "clean": "rm -rf dist/",
     "dev": "vite",
-    "build": "tsc && vite build",
+    "tsc": "tsc",
     "test": "vitest",
+    "build": "npm run tsc && npm run build:libs && npm run build:types",
+    "build:libs": "vite build",
+    "build:types": "tsc src/libs/*.ts --declaration --emitDeclarationOnly --declarationDir dist/",
     "coverage": "vitest run --coverage",
     "preview": "vite preview"
   },

@@ -8,7 +8,7 @@ const changelog = ({
   filename?: string;
   logType?: LogType;
 }) => {
-  const log = getMessageLog(logType);
+  const log = getMessageLog(logType || "warn");
   console.log(log, filename);
 };
 
