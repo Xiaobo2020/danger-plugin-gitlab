@@ -1,8 +1,28 @@
 {
   "name": "danger-plugin-gitlab",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
+  "main": "./dist/libs/index.cjs",
+  "module": "./dist/libs/index.js",
+  "types": "./dist/libs/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/libs/index.js",
+      "require": "./dist/libs/index.cjs"
+    },
+    "./libs": {
+      "import": "./dist/libs/index.js",
+      "require": "./dist/libs/index.cjs"
+    },
+    "./utils": {
+      "import": "./dist/utils/index.js",
+      "require": "./dist/utils/index.cjs"
+    }
+  },
+  "files": [
+    "dist/*"
+  ],
   "scripts": {
     "clean": "rm -rf dist/",
     "dev": "vite",
