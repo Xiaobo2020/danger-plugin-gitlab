@@ -33,8 +33,8 @@ const needChangelog = (options: Options = {}) => {
   const isTrival = description.includes(`[x] ${checkMessage}`);
 
   if (!isTrival && !hasChangelog) {
-    const log = getLogger(logType as any);
-    log(logMessage);
+    const logger = getLogger(logType as any);
+    logger(logMessage);
   }
 };
 

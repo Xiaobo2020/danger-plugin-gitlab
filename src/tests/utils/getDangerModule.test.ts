@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import {
   getDanger,
   getFail,
@@ -17,6 +17,9 @@ vi.stubGlobal("warn", mockWarn);
 vi.stubGlobal("message", mockMessage);
 
 describe("getDangerModule", () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+  });
   it("should return danger object", () => {
     expect(getDanger()).toBe(mockDanger);
   });

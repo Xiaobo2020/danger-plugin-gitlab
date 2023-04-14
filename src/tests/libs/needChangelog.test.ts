@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, Mock } from "vitest";
+import { describe, it, expect, vi, Mock, beforeEach } from "vitest";
 import needChangelog from "../../libs/needChangelog";
 import { getDanger } from "../../utils";
 
@@ -9,6 +9,10 @@ vi.mock("../../utils", () => ({
 }));
 
 describe("needChangelog", () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+  });
+
   it("should not call log function when changelog.md exists.", () => {
     (getDanger as Mock).mockReturnValue({
       // @ts-ignore
@@ -60,5 +64,23 @@ describe("needChangelog", () => {
     });
     needChangelog();
     expect(mockLogger).toHaveBeenCalled();
+  });
+
+  it("should call log function with custom log message", () => {
+    (getDanger as Mock).mockReturnValue({
+      // @ts-ignore
+      git: {
+        modified_files: ["a.txt"],
+      },
+      gitlab: {
+        // @ts-ignore
+        mr: {
+          description: "",
+        },
+      },
+    });
+    const logMessage = "This is log message.";
+    needChangelog({ logMessage });
+    expect(mockLogger).toHaveBeenCalledWith(logMessage);
   });
 });

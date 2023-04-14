@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import getLogger from "../../utils/getLogger";
 
 const mockFail = vi.fn();
@@ -12,6 +12,9 @@ vi.mock("../../utils/getDangerModule.ts", () => ({
 }));
 
 describe("getLogger", () => {
+  beforeEach(() => {
+    vi.resetAllMocks();
+  });
   it('should return fail function if logType is "fail"', () => {
     expect(getLogger("fail")).toBe(mockFail);
   });
