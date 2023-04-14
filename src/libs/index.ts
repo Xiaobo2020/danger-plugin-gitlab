@@ -1,1 +1,1 @@
-export { default as changelog } from "./changelog";
+export { default as needChangelog } from "./needChangelog";

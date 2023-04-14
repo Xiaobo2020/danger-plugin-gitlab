@@ -11,11 +11,7 @@
       "import": "./dist/libs/index.js",
       "require": "./dist/libs/index.cjs"
     },
-    "./libs": {
-      "import": "./dist/libs/index.js",
-      "require": "./dist/libs/index.cjs"
-    },
-    "./utils": {
+    "./dist/utils": {
       "import": "./dist/utils/index.js",
       "require": "./dist/utils/index.cjs"
     }

@@ -10,7 +10,11 @@ type ChangelogOptions = {
   checkMessage?: string;
   logMessage?: string;
 };
-const changelog = (options: ChangelogOptions = {}) => {
+
+/**
+ * @description Check if CHANGELOG included in the merge request
+ */
+const needChangelog = (options: ChangelogOptions = {}) => {
   const {
     filename = "changelog.md",
     logType = "warn",
@@ -33,4 +37,4 @@ const changelog = (options: ChangelogOptions = {}) => {
   }
 };
 
-export default changelog;
+export default needChangelog;

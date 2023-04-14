@@ -1,12 +1,12 @@
 import { describe, it, beforeEach, expect, vi } from "vitest";
-import changelog from "../../libs/changelog";
+import needChangelog from "../../libs/needChangelog";
 
 const mockLog = vi.fn();
 vi.mock("../../utils/getLog", () => ({
   default: () => mockLog,
 }));
 
-describe("changelog", () => {
+describe("needChangelog", () => {
   beforeEach(() => {
     // @ts-ignore
     global.danger = undefined;
@@ -25,7 +25,7 @@ describe("changelog", () => {
         },
       },
     };
-    changelog();
+    needChangelog();
     expect(mockLog).not.toHaveBeenCalled();
   });
 
@@ -43,7 +43,7 @@ describe("changelog", () => {
         },
       },
     };
-    changelog();
+    needChangelog();
     expect(mockLog).not.toHaveBeenCalled();
   });
 
@@ -61,7 +61,7 @@ describe("changelog", () => {
         },
       },
     };
-    changelog();
+    needChangelog();
     expect(mockLog).toHaveBeenCalled();
   });
 });
