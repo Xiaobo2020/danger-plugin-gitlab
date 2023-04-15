@@ -15,7 +15,6 @@ describe("lockfile", () => {
 
   it("should not call log function when no package.json modified", () => {
     (getDanger as Mock).mockReturnValue({
-      // @ts-ignore
       git: {
         modified_files: ["a.txt"],
       },
@@ -24,20 +23,8 @@ describe("lockfile", () => {
     expect(mockLogger).not.toHaveBeenCalled();
   });
 
-  it("should not call log function when package.json and yarn.lock both modified", () => {
-    (getDanger as Mock).mockReturnValue({
-      // @ts-ignore
-      git: {
-        modified_files: ["a.txt", "package.json", "yarn.lock"],
-      },
-    });
-    lockfile({ lockfilename: "yarn.lock" });
-    expect(mockLogger).not.toHaveBeenCalled();
-  });
-
   it("should not call log function when package.json and package-lock.json both modified", () => {
     (getDanger as Mock).mockReturnValue({
-      // @ts-ignore
       git: {
         modified_files: ["a.txt", "package.json", "package-lock.json"],
       },
@@ -46,9 +33,18 @@ describe("lockfile", () => {
     expect(mockLogger).not.toHaveBeenCalled();
   });
 
+  it("should not call log function when package.json and yarn.lock both modified", () => {
+    (getDanger as Mock).mockReturnValue({
+      git: {
+        modified_files: ["a.txt", "package.json", "yarn.lock"],
+      },
+    });
+    lockfile({ lockfilename: "yarn.lock" });
+    expect(mockLogger).not.toHaveBeenCalled();
+  });
+
   it("should call log function when only package.json modified", () => {
     (getDanger as Mock).mockReturnValue({
-      // @ts-ignore
       git: {
         modified_files: ["a.txt", "package.json"],
       },
@@ -59,7 +55,6 @@ describe("lockfile", () => {
 
   it("should call log function with custom log message", () => {
     (getDanger as Mock).mockReturnValue({
-      // @ts-ignore
       git: {
         modified_files: ["a.txt", "package.json"],
       },
@@ -67,5 +62,15 @@ describe("lockfile", () => {
     const logMessage = "This is log message.";
     lockfile({ logMessage });
     expect(mockLogger).toHaveBeenCalledWith(logMessage);
+  });
+
+  it("should call log function when only package.json modified with custom path", () => {
+    (getDanger as Mock).mockReturnValue({
+      git: {
+        modified_files: ["a.txt", "packages/server/package.json"],
+      },
+    });
+    lockfile({ path: "packages/server/" });
+    expect(mockLogger).toHaveBeenCalled();
   });
 });

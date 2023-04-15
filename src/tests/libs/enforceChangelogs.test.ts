@@ -15,12 +15,10 @@ describe("enforceChangelogs", () => {
 
   it("should not call log function when changelog.md exists.", () => {
     (getDanger as Mock).mockReturnValue({
-      // @ts-ignore
       git: {
         modified_files: ["a.txt", "changelog.md"],
       },
       gitlab: {
-        // @ts-ignore
         mr: {
           description: "",
         },
@@ -32,12 +30,10 @@ describe("enforceChangelogs", () => {
 
   it("should not call log function when check message is checked", () => {
     (getDanger as Mock).mockReturnValue({
-      // @ts-ignore
       git: {
         modified_files: ["a.txt"],
       },
       gitlab: {
-        // @ts-ignore
         mr: {
           description:
             "[x] This is a trival MR and no CHANGELOG changes required.",
@@ -50,12 +46,10 @@ describe("enforceChangelogs", () => {
 
   it("should call log function when check message is not checked", () => {
     (getDanger as Mock).mockReturnValue({
-      // @ts-ignore
       git: {
         modified_files: ["a.txt"],
       },
       gitlab: {
-        // @ts-ignore
         mr: {
           description:
             "[ ] This is a trival MR and no CHANGELOG changes required.",
@@ -68,12 +62,10 @@ describe("enforceChangelogs", () => {
 
   it("should call log function with custom log message", () => {
     (getDanger as Mock).mockReturnValue({
-      // @ts-ignore
       git: {
         modified_files: ["a.txt"],
       },
       gitlab: {
-        // @ts-ignore
         mr: {
           description: "",
         },

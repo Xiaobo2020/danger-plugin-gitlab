@@ -27,6 +27,12 @@ enforceChangelogs({
 });
 ```
 
+## TODO
+
+- [ ] smallMR
+- [ ] moreTesting
+- [ ] ...
+
 ## Features
 
 ### enforceChangelogs

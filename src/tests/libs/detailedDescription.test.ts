@@ -16,7 +16,6 @@ describe("detailedDescription", () => {
   it("should call log function when length of description is less than default min length", () => {
     (getDanger as Mock).mockReturnValue({
       gitlab: {
-        // @ts-ignore
         mr: {
           description: "foo",
         },
@@ -29,7 +28,6 @@ describe("detailedDescription", () => {
   it("should call log function when length of description is less than default min length exclude mention", () => {
     (getDanger as Mock).mockReturnValue({
       gitlab: {
-        // @ts-ignore
         mr: {
           description: "foo @sean",
         },
@@ -42,7 +40,6 @@ describe("detailedDescription", () => {
   it("should call log function when length of description is less than custom min length", () => {
     (getDanger as Mock).mockReturnValue({
       gitlab: {
-        // @ts-ignore
         mr: {
           description: "foo bar",
         },
@@ -55,7 +52,6 @@ describe("detailedDescription", () => {
   it("should call log function with custom log message", () => {
     (getDanger as Mock).mockReturnValue({
       gitlab: {
-        // @ts-ignore
         mr: {
           description: "foo",
         },

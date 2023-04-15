@@ -23,7 +23,7 @@ const enforceChangelogs = (options: Options = {}) => {
   } = options;
 
   const {
-    git: { modified_files: modifiedFiles },
+    git: { modified_files: modifiedFiles = [] },
     gitlab: {
       mr: { description },
     },
