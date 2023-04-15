@@ -61,6 +61,31 @@ describe("lockfile", () => {
     );
   });
 
+  it("should not call log function when only package.json modified but no dependencies changed", async () => {
+    (readFileSync as Mock).mockReturnValue(`{
+  "scripts": {
+    "test": "echo 'test'"
+  },
+  "dependencies": {
+    "foo": "0.0.1"
+  },
+  "devDependencies": {
+    "bar": "0.0.2"
+  }
+}`);
+
+    (getDanger as Mock).mockReturnValue({
+      git: {
+        modified_files: ["a.txt", "package.json"],
+      },
+    });
+
+    (getAddedLines as Mock).mockReturnValue([3]);
+
+    await lockfile();
+    expect(mockLogger).not.toHaveBeenCalled();
+  });
+
   it("should call log function when only package.json modified", async () => {
     (readFileSync as Mock).mockReturnValue(`{
   "dependencies": {
