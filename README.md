@@ -62,12 +62,13 @@ detailedDescription({
 
 ### lockfile
 
-Make sure the `package-lock.json` (or `yarn.lock`) is up to date when changes were made to `package.json`.
+- Make sure the `package-lock.json` (or `yarn.lock`) is up to date when changes were made to `package.json`.
+- Check if only `package-lock.json` (or `yarn.lock`) was modified with `package.json` no changed.
 
 ```javascript
 lockfile({
   logType: "message",
   lockfilename: "package-lock.json",
-  logMessage: "Changes were mad to package.json, but not to package-lock.json.",
+  path: "packages/server/",
 });
 ```

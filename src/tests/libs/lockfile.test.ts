@@ -50,18 +50,21 @@ describe("lockfile", () => {
       },
     });
     lockfile();
-    expect(mockLogger).toHaveBeenCalled();
+    expect(mockLogger).toHaveBeenCalledWith(
+      "Dependencies (package.json) may have changed, but lockfile (package-lock.json) has not been updated."
+    );
   });
 
-  it("should call log function with custom log message", () => {
+  it("should call log function when only package-lock.json modified", () => {
     (getDanger as Mock).mockReturnValue({
       git: {
-        modified_files: ["a.txt", "package.json"],
+        modified_files: ["a.txt", "package-lock.json"],
       },
     });
-    const logMessage = "This is log message.";
-    lockfile({ logMessage });
-    expect(mockLogger).toHaveBeenCalledWith(logMessage);
+    lockfile();
+    expect(mockLogger).toHaveBeenCalledWith(
+      "Lockfile (package-lock.json) has been updated, but no dependencies (package.json) have changed."
+    );
   });
 
   it("should call log function when only package.json modified with custom path", () => {
@@ -71,6 +74,20 @@ describe("lockfile", () => {
       },
     });
     lockfile({ path: "packages/server/" });
-    expect(mockLogger).toHaveBeenCalled();
+    expect(mockLogger).toHaveBeenCalledWith(
+      "Dependencies (packages/server/package.json) may have changed, but lockfile (packages/server/package-lock.json) has not been updated."
+    );
+  });
+
+  it("should call log function when only package-lock.json modified with custom path", () => {
+    (getDanger as Mock).mockReturnValue({
+      git: {
+        modified_files: ["a.txt", "packages/server/package-lock.json"],
+      },
+    });
+    lockfile({ path: "packages/server/" });
+    expect(mockLogger).toHaveBeenCalledWith(
+      "Lockfile (packages/server/package-lock.json) has been updated, but no dependencies (packages/server/package.json) have changed."
+    );
   });
 });
