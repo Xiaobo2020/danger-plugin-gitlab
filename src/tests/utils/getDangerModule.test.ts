@@ -4,17 +4,20 @@ import {
   getFail,
   getMessage,
   getWarn,
+  getMarkdown,
 } from "../../utils/getDangerModule";
 
 const mockDanger = { foo: "bar" };
 const mockFail = vi.fn();
 const mockWarn = vi.fn();
 const mockMessage = vi.fn();
+const mockMarkdown = vi.fn();
 
 vi.stubGlobal("danger", mockDanger);
 vi.stubGlobal("fail", mockFail);
 vi.stubGlobal("warn", mockWarn);
 vi.stubGlobal("message", mockMessage);
+vi.stubGlobal("markdown", mockMarkdown);
 
 describe("getDangerModule", () => {
   beforeEach(() => {
@@ -31,5 +34,8 @@ describe("getDangerModule", () => {
   });
   it("should return message function", () => {
     expect(getMessage()).toBe(mockMessage);
+  });
+  it("should return markdown function", () => {
+    expect(getMarkdown()).toBe(mockMarkdown);
   });
 });

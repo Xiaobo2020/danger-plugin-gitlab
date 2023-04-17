@@ -3,6 +3,7 @@ import {
   fail as _fail,
   warn as _warn,
   message as _message,
+  markdown as _markdown,
 } from "danger";
 
 declare global {
@@ -10,4 +11,5 @@ declare global {
   var message: typeof _message;
   var warn: typeof _warn;
   var fail: typeof _fail;
+  var markdown: typeof _markdown;
 }
