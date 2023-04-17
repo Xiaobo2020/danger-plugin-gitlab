@@ -14,7 +14,7 @@ type Options = {
 /**
  * @description Check if CHANGELOG included in the merge request
  */
-const enforceChangelogs = (options: Options = {}) => {
+const enforceChangelog = (options: Options = {}) => {
   const {
     filename = "changelog.md",
     logType = "warn",
@@ -38,4 +38,4 @@ const enforceChangelogs = (options: Options = {}) => {
   }
 };
 
-export default enforceChangelogs;
+export default enforceChangelog;

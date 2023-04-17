@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, Mock, vi } from "vitest";
-import enforceChangelogs from "../../libs/enforceChangelogs";
+import enforceChangelog from "../../libs/enforceChangelog";
 import { getDanger } from "../../utils";
 
 const mockLogger = vi.fn();
@@ -8,7 +8,7 @@ vi.mock("../../utils", () => ({
   getDanger: vi.fn(),
 }));
 
-describe("enforceChangelogs", () => {
+describe("enforceChangelog", () => {
   beforeEach(() => {
     vi.resetAllMocks();
   });
@@ -24,7 +24,7 @@ describe("enforceChangelogs", () => {
         },
       },
     });
-    enforceChangelogs();
+    enforceChangelog();
     expect(mockLogger).not.toHaveBeenCalled();
   });
 
@@ -40,7 +40,7 @@ describe("enforceChangelogs", () => {
         },
       },
     });
-    enforceChangelogs();
+    enforceChangelog();
     expect(mockLogger).not.toHaveBeenCalled();
   });
 
@@ -56,7 +56,7 @@ describe("enforceChangelogs", () => {
         },
       },
     });
-    enforceChangelogs();
+    enforceChangelog();
     expect(mockLogger).toHaveBeenCalled();
   });
 
@@ -72,7 +72,7 @@ describe("enforceChangelogs", () => {
       },
     });
     const logMessage = "This is log message.";
-    enforceChangelogs({ logMessage });
+    enforceChangelog({ logMessage });
     expect(mockLogger).toHaveBeenCalledWith(logMessage);
   });
 });
