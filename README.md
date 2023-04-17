@@ -38,3 +38,7 @@ enforceChangelog({
 - [enforceChangelog](./doc/libs/enforceChangelog.md)
 - [detailedDescription](./doc/libs/detailedDescription.md)
 - [lockfile](./doc/libs/lockfile.md)
+
+## Util
+
+- [getLogger](./doc/utils/getLogger.md)
