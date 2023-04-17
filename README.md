@@ -36,18 +36,7 @@ enforceChangelog({
 ## Library
 
 - [enforceChangelog](./doc/libs/enforceChangelog.md)
-
-### detailedDescription
-
-Make sure each merge request has a detailed description.
-
-```javascript
-detailedDescription({
-  logType: "message",
-  minLength: 5,
-  logMessage: "Please provide a summary in the pull request description.",
-});
-```
+- [detailedDescription](./doc/libs/detailedDescription.md)
 
 ### lockfile
 
