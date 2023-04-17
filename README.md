@@ -33,20 +33,9 @@ enforceChangelog({
 - [ ] moreTesting
 - [ ] ...
 
-## Features
+## Library
 
-### enforceChangelog
-
-Make sure every change is recorded in the changelog.
-
-```javascript
-enforceChangelog({
-  filename: "changelog.md",
-  logType: "warn",
-  checkMessage: "This is a trival MR and no CHANGELOG changes required.",
-  logMessage: "Please add a changelog entry for your changes.",
-});
-```
+- [enforceChangelog](./doc/libs/enforceChangelog.md)
 
 ### detailedDescription
 
