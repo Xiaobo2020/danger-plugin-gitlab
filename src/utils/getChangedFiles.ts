@@ -1,6 +1,6 @@
 import { getDanger } from "./getDangerModule";
 
-const getCommitFiles = () => {
+const getChangedFiles = () => {
   const {
     git: {
       modified_files: modifiedFiles = [],
@@ -11,4 +11,4 @@ const getCommitFiles = () => {
   return [...createdFiles, ...modifiedFiles];
 };
 
-export default getCommitFiles;
+export default getChangedFiles;

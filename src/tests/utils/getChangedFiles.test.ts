@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, Mock, vi } from "vitest";
-import getCommitFiles from "../../utils/getCommitFiles";
+import getChangedFiles from "../../utils/getChangedFiles";
 import { getDanger } from "../../utils/getDangerModule";
 
 vi.mock("../../utils/getDangerModule.ts", () => ({
@@ -20,6 +20,6 @@ describe("getCommitFiles", () => {
         created_files: createdFiles,
       },
     });
-    expect(getCommitFiles()).toEqual([...createdFiles, ...modifiedFiles]);
+    expect(getChangedFiles()).toEqual([...createdFiles, ...modifiedFiles]);
   });
 });
