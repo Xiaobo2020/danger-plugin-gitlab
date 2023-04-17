@@ -1,4 +1,4 @@
-import { getDanger, getLogger } from "../utils";
+import { getDanger, getLogger } from "../../utils";
 
 const DEFAULT_MIN_LENGTH = 5;
 const DEFAULT_LOG_MESSAGE =

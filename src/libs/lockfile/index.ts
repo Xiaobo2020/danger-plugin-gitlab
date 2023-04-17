@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { getAddedLines, getDanger, getLogger } from "../utils";
+import { getAddedLines, getDanger, getLogger } from "../../utils";
 
 const DEFAULT_LOCKFILENAME = "package-lock.json";
 const getPkgLockMissingLogMessage = (pkg: string, pkgLock: string) =>

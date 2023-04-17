@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it, Mock, vi } from "vitest";
-import getChangedFiles from "./getChangedFiles";
-import { getDanger } from "./getDangerModule";
+import getChangedFiles from ".";
+import { getDanger } from "../getDangerModule";
 
-vi.mock("./getDangerModule.ts", () => ({
+vi.mock("../getDangerModule", () => ({
   getDanger: vi.fn(),
 }));
 

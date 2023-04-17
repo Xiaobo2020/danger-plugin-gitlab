@@ -1,11 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import {
-  getDanger,
-  getFail,
-  getMessage,
-  getWarn,
-  getMarkdown,
-} from "./getDangerModule";
+import { getDanger, getFail, getMessage, getWarn, getMarkdown } from ".";
 
 const mockDanger = { foo: "bar" };
 const mockFail = vi.fn();
