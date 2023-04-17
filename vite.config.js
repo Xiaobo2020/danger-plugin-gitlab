@@ -2,6 +2,11 @@ import { glob } from "glob";
 import { resolve } from "path";
 import { defineConfig } from "vite";
 
+const isTestFile = (filename) =>
+  [".test.ts", ".spec.ts"].some(
+    (suffix) => (filename || "").indexOf(suffix) !== -1
+  );
+
 export default defineConfig({
   build: {
     minify: true,
@@ -12,9 +17,11 @@ export default defineConfig({
       entry: [
         ...glob
           .sync("src/libs/**/*.ts")
+          .filter((file) => !isTestFile(file))
           .map((file) => resolve(__dirname, file)),
         ...glob
           .sync("src/utils/**/*.ts")
+          .filter((file) => !isTestFile(file))
           .map((file) => resolve(__dirname, file)),
       ],
     },

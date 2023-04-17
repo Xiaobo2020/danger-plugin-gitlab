@@ -5,7 +5,7 @@ import {
   getMessage,
   getWarn,
   getMarkdown,
-} from "../../utils/getDangerModule";
+} from "./getDangerModule";
 
 const mockDanger = { foo: "bar" };
 const mockFail = vi.fn();

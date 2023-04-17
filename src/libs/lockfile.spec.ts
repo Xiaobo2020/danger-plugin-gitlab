@@ -1,10 +1,10 @@
 import { beforeEach, describe, expect, it, Mock, vi } from "vitest";
-import lockfile from "../../libs/lockfile";
-import { getDanger, getAddedLines } from "../../utils";
+import lockfile from "./lockfile";
+import { getDanger, getAddedLines } from "../utils";
 import { readFileSync } from "node:fs";
 
 const mockLogger = vi.fn();
-vi.mock("../../utils", () => ({
+vi.mock("../utils", () => ({
   getLogger: () => mockLogger,
   getDanger: vi.fn(),
   getAddedLines: vi.fn(),

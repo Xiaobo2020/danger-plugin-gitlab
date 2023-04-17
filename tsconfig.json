@@ -7,17 +7,17 @@
     "lib": ["ESNext"],
     "moduleResolution": "Node",
     "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": ["src/*"]
+    },
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
-    "noEmit": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "skipLibCheck": true,
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "declarationDir": "dist"
-  },
-  "include": ["./src/libs", "./src/utils", "./src/types"]
+    "noEmit": true
+  }
 }

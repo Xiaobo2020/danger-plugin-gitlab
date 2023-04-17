@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it, Mock, vi } from "vitest";
-import detailedDescription from "../../libs/detailedDescription";
-import { getDanger } from "../../utils";
+import detailedDescription from "./detailedDescription";
+import { getDanger } from "../utils";
 
 const mockLogger = vi.fn();
-vi.mock("../../utils", () => ({
+vi.mock("../utils", () => ({
   getLogger: () => mockLogger,
   getDanger: vi.fn(),
 }));

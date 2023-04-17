@@ -1,12 +1,12 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import getLogger from "../../utils/getLogger";
+import getLogger from "./getLogger";
 
 const mockFail = vi.fn();
 const mockWarn = vi.fn();
 const mockMessage = vi.fn();
 const mockMarkdown = vi.fn();
 
-vi.mock("../../utils/getDangerModule.ts", () => ({
+vi.mock("./getDangerModule.ts", () => ({
   getFail: () => mockFail,
   getWarn: () => mockWarn,
   getMessage: () => mockMessage,

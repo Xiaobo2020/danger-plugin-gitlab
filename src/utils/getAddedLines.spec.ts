@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it, Mock, vi } from "vitest";
-import getAddedLines from "../../utils/getAddedLines";
-import { getDanger } from "../../utils/getDangerModule";
+import getAddedLines from "./getAddedLines";
+import { getDanger } from "./getDangerModule";
 
-vi.mock("../../utils/getDangerModule", () => ({
+vi.mock("./getDangerModule", () => ({
   getDanger: vi.fn(),
 }));
 

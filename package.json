@@ -25,9 +25,9 @@
     "tsc": "tsc",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "build": "npm run tsc && npm run build:libs && npm run build:types",
+    "build": "npm run tsc && npm run build:types && npm run build:libs",
     "build:libs": "vite build",
-    "build:types": "tsc -p tsconfig.prod.json",
+    "build:types": "tsc --project tsconfig.build.json",
     "preview": "vite preview"
   },
   "devDependencies": {
