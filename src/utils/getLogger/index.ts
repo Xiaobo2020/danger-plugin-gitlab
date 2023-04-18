@@ -1,11 +1,12 @@
 import { getFail, getMarkdown, getMessage, getWarn } from "../getDangerModule";
+import type { LogType } from "../getDangerModule";
 
 function getLogger(logType: "fail"): ReturnType<typeof getFail>;
 function getLogger(logType: "warn"): ReturnType<typeof getWarn>;
 function getLogger(logType: "message"): ReturnType<typeof getMessage>;
 function getLogger(logType: "markdown"): ReturnType<typeof getMarkdown>;
 function getLogger(
-  logType: "fail" | "warn" | "message" | "markdown"
+  logType: LogType
 ):
   | ReturnType<typeof getFail>
   | ReturnType<typeof getWarn>
