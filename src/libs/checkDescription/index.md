@@ -7,7 +7,7 @@ import { checkDescription } from "danger-plugin-gitlab";
 
 checkDescription({
   logType: "message",
-  minLength: 5,
+  minLength: 50,
   logMessage: "Please provide a summary in the merge request description.",
 });
 ```

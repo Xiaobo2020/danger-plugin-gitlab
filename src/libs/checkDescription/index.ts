@@ -1,14 +1,15 @@
-import { getDanger, getLogger } from "../../utils";
 import type { LogType } from "../../utils";
+import { getDanger, getLogger } from "../../utils";
 
-const DEFAULT_MIN_LENGTH = 5;
+const DEFAULT_LOG_TYPE = "message";
 const DEFAULT_LOG_MESSAGE =
   "Please provide a summary in the pull request description.";
+const DEFAULT_MIN_LENGTH = 50;
 
 type Options = {
   logType?: LogType;
-  minLength?: number;
   logMessage?: string;
+  minLength?: number;
 };
 
 /**
@@ -16,7 +17,7 @@ type Options = {
  */
 const checkDescription = (options: Options = {}) => {
   const {
-    logType = "message",
+    logType = DEFAULT_LOG_TYPE,
     minLength = DEFAULT_MIN_LENGTH,
     logMessage = DEFAULT_LOG_MESSAGE,
   } = options;
