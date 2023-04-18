@@ -5,8 +5,7 @@ const DEFAULT_LOG_FILE = "changelog.md";
 const DEFAULT_LOG_TYPE = "warn";
 const DEFAULT_LOG_MESSAGE = "Please add a changelog entry for your changes.";
 
-const DEFAULT_SKIP_MESSAGE =
-  "This is a trival MR and no CHANGELOG changes required.";
+const DEFAULT_SKIP_MESSAGE = "Skip CHANGELOG check";
 
 type Options = {
   logFile?: string;
@@ -41,7 +40,7 @@ const checkChangelog = (options: Options = {}) => {
 
   const hasChangelog = modifiedFiles.includes(logFile);
   const isSkip = enableSkip
-    ? description.indexOf(`[x] ${skipMessage}`) !== -1
+    ? description.includes(`[x] ${skipMessage}`)
     : false;
 
   if (!hasChangelog && !isSkip) {

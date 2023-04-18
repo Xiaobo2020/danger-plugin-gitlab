@@ -50,11 +50,11 @@ describe("checkChangelog", () => {
       },
       gitlab: {
         mr: {
-          description: "[ ] Skip check CHANGELOG",
+          description: "[ ] Skip CHANGELOG check",
         },
       },
     });
-    checkChangelog({ enableSkip: true, skipMessage: "Skip check CHANGELOG" });
+    checkChangelog({ enableSkip: true });
     expect(mockLogger).toHaveBeenCalled();
   });
 
@@ -65,11 +65,11 @@ describe("checkChangelog", () => {
       },
       gitlab: {
         mr: {
-          description: "[x] Skip check CHANGELOG",
+          description: "[x] Skip CHANGELOG check",
         },
       },
     });
-    checkChangelog({ enableSkip: true, skipMessage: "Skip check CHANGELOG" });
+    checkChangelog({ enableSkip: true });
     expect(mockLogger).not.toHaveBeenCalled();
   });
 
