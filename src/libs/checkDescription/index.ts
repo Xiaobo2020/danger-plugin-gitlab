@@ -13,7 +13,7 @@ type Options = {
 /**
  * @description Check if the description in the merge request detailed enough
  */
-const detailedDescription = (options: Options = {}) => {
+const checkDescription = (options: Options = {}) => {
   const {
     logType = "message",
     minLength = DEFAULT_MIN_LENGTH,
@@ -41,4 +41,4 @@ const detailedDescription = (options: Options = {}) => {
   }
 };
 
-export default detailedDescription;
+export default checkDescription;

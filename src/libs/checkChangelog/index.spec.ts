@@ -8,7 +8,7 @@ vi.mock("../../utils", () => ({
   getDanger: vi.fn(),
 }));
 
-describe("enforceChangelog", () => {
+describe("checkChangelog", () => {
   beforeEach(() => {
     vi.resetAllMocks();
   });
