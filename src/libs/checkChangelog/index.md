@@ -18,7 +18,7 @@ If you want to skip the check for CHANGELOG, you can set `enableSkip` to be `tru
 ```javascript
 checkChangelog({
   enableSkip: true,
-  skipMessage: "This is a trival MR and no CHANGELOG changes required.",
+  skipMessage: "Skip CHANGELOG check",
 });
 ```
 
@@ -29,5 +29,5 @@ Then insert below content into your MR description.
 
 # Skip
 
-- [x] This is a trival MR and no CHANGELOG changes required.
+- [x] Skip CHANGELOG check
 ```

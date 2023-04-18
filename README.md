@@ -36,8 +36,8 @@ enforceChangelog({
 ## Library
 
 - [checkChangelog](./src/libs/checkChangelog/index.md)
+- [checkDescription](./src/libs/checkDescription/index.md)
 - [checkLockfile](./src/libs/checkLockfile/index.md)
-- [detailedDescription](./src/libs/detailedDescription/index.md)
 
 ## Util
 
