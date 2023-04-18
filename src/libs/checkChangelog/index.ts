@@ -1,4 +1,5 @@
 import { getDanger, getLogger } from "../../utils";
+import type { LogType } from "../../utils";
 
 const DEFAULT_CHECK_MESSAGE =
   "This is a trival MR and no CHANGELOG changes required.";
@@ -6,7 +7,7 @@ const DEFAULT_LOG_MESSAGE = "Please add a changelog entry for your changes.";
 
 type Options = {
   filename?: string;
-  logType?: "fail" | "warn" | "message";
+  logType?: LogType;
   checkMessage?: string;
   logMessage?: string;
 };

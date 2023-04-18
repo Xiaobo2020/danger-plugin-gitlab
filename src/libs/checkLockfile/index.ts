@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { getAddedLines, getDanger, getLogger } from "../../utils";
+import type { LogType } from "../../utils";
 
 const DEFAULT_LOCKFILENAME = "package-lock.json";
 const getPkgLockMissingLogMessage = (pkg: string, pkgLock: string) =>
@@ -46,7 +47,7 @@ const checkMissingPkg = ({
   pkgChanged,
   pkgLockChanged,
 }: {
-  logType: "warn" | "message";
+  logType: LogType;
   pkg: string;
   pkgLock: string;
   pkgChanged: boolean;
@@ -65,7 +66,7 @@ const checkMissingPkgLock = async ({
   pkgChanged,
   pkgLockChanged,
 }: {
-  logType: "warn" | "message";
+  logType: LogType;
   pkg: string;
   pkgLock: string;
   pkgChanged: boolean;
@@ -93,7 +94,7 @@ const checkMissingPkgLock = async ({
 };
 
 type Options = {
-  logType?: "warn" | "message";
+  logType?: LogType;
   lockfile?: string;
   path?: string;
 };
