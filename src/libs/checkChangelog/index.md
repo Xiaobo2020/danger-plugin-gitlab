@@ -1,11 +1,11 @@
-# enforceChangelog
+# checkChangelog
 
-Make sure every change is recorded in the changelog.
+Make sure every change is recorded in the CHANGELOG.
 
 ```javascript
-import { enforceChangelog } from "danger-plugin-gitlab";
+import { checkChangelog } from "danger-plugin-gitlab";
 
-enforceChangelog({
+checkChangelog({
   filename: "changelog.md",
   logType: "warn",
   checkMessage: "This is a trival MR and no CHANGELOG changes required.",
