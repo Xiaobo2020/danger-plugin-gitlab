@@ -41,4 +41,8 @@ enforceChangelog({
 
 ## Util
 
+- [getAddedLines](./src/utils/getAddedLines/index.md)
+- [getChangedFiles](./src/utils/getChangedFiles/index.md)
+- [getDangerModule](./src/utils/getDangerModule/index.md)
 - [getLogger](./src/utils/getLogger/index.md)
+- [isExternal](./src/utils/isExternal/index.md)
