@@ -7,10 +7,6 @@
     "lib": ["ESNext"],
     "moduleResolution": "Node",
     "strict": true,
-    "baseUrl": ".",
-    "paths": {
-      "*": ["src/*"]
-    },
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
