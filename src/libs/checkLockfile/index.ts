@@ -94,17 +94,17 @@ const checkMissingPkgLock = async ({
 
 type Options = {
   logType?: "warn" | "message";
-  lockfilename?: string;
+  lockfile?: string;
   path?: string;
 };
 
 /**
  * Keep Lockfile up to date.
  */
-const lockfile = async (options: Options = {}) => {
+const checkLockfile = async (options: Options = {}) => {
   const {
     logType = "message",
-    lockfilename = DEFAULT_LOCKFILENAME,
+    lockfile = DEFAULT_LOCKFILENAME,
     path = "",
   } = options;
 
@@ -118,7 +118,7 @@ const lockfile = async (options: Options = {}) => {
   const committedFiles = [...createdFiles, ...modifiedFiles];
 
   const pkg = `${path}package.json`;
-  const pkgLock = `${path}${lockfilename}`;
+  const pkgLock = `${path}${lockfile}`;
 
   const pkgChanged = committedFiles.includes(pkg);
   const pkgLockChanged = committedFiles.includes(pkgLock);
@@ -140,4 +140,4 @@ const lockfile = async (options: Options = {}) => {
   });
 };
 
-export default lockfile;
+export default checkLockfile;

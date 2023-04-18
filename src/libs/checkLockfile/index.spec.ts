@@ -1,7 +1,7 @@
-import { beforeEach, describe, expect, it, Mock, vi } from "vitest";
-import lockfile from ".";
-import { getDanger, getAddedLines } from "../../utils";
 import { readFileSync } from "node:fs";
+import { beforeEach, describe, expect, it, Mock, vi } from "vitest";
+import checkLockfile from ".";
+import { getAddedLines, getDanger } from "../../utils";
 
 const mockLogger = vi.fn();
 vi.mock("../../utils", () => ({
@@ -25,7 +25,7 @@ describe("lockfile", () => {
         modified_files: ["a.txt"],
       },
     });
-    lockfile();
+    checkLockfile();
     expect(mockLogger).not.toHaveBeenCalled();
   });
 
@@ -35,7 +35,7 @@ describe("lockfile", () => {
         modified_files: ["a.txt", "package.json", "package-lock.json"],
       },
     });
-    lockfile();
+    checkLockfile();
     expect(mockLogger).not.toHaveBeenCalled();
   });
 
@@ -45,7 +45,7 @@ describe("lockfile", () => {
         modified_files: ["a.txt", "package.json", "yarn.lock"],
       },
     });
-    lockfile({ lockfilename: "yarn.lock" });
+    checkLockfile({ lockfile: "yarn.lock" });
     expect(mockLogger).not.toHaveBeenCalled();
   });
 
@@ -55,7 +55,7 @@ describe("lockfile", () => {
         modified_files: ["a.txt", "package-lock.json"],
       },
     });
-    lockfile();
+    checkLockfile();
     expect(mockLogger).toHaveBeenCalledWith(
       "Lockfile (package-lock.json) has been updated, but no dependencies (package.json) have changed."
     );
@@ -82,7 +82,7 @@ describe("lockfile", () => {
 
     (getAddedLines as Mock).mockReturnValue([3]);
 
-    await lockfile();
+    await checkLockfile();
     expect(mockLogger).not.toHaveBeenCalled();
   });
 
@@ -104,7 +104,7 @@ describe("lockfile", () => {
 
     (getAddedLines as Mock).mockReturnValue([3, 6]);
 
-    await lockfile();
+    await checkLockfile();
     expect(mockLogger).toHaveBeenCalledWith(
       "Dependencies (package.json) may have changed, but lockfile (package-lock.json) has not been updated."
     );
@@ -128,7 +128,7 @@ describe("lockfile", () => {
 
     (getAddedLines as Mock).mockReturnValue([3, 6]);
 
-    await lockfile({ path: "packages/server/" });
+    await checkLockfile({ path: "packages/server/" });
     expect(mockLogger).toHaveBeenCalledWith(
       "Dependencies (packages/server/package.json) may have changed, but lockfile (packages/server/package-lock.json) has not been updated."
     );
@@ -140,7 +140,7 @@ describe("lockfile", () => {
         modified_files: ["a.txt", "packages/server/package-lock.json"],
       },
     });
-    lockfile({ path: "packages/server/" });
+    checkLockfile({ path: "packages/server/" });
     expect(mockLogger).toHaveBeenCalledWith(
       "Lockfile (packages/server/package-lock.json) has been updated, but no dependencies (packages/server/package.json) have changed."
     );
