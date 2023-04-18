@@ -2,7 +2,10 @@ import { readFileSync } from "node:fs";
 import { getAddedLines, getDanger, getLogger } from "../../utils";
 import type { LogType } from "../../utils";
 
-const DEFAULT_LOCKFILENAME = "package-lock.json";
+const DEFAULT_LOG_TYPE = "warn";
+const DEFAULT_LOCKFILE = "package-lock.json";
+const DEFAULT_PATH = "";
+
 const getPkgLockMissingLogMessage = (pkg: string, pkgLock: string) =>
   `Dependencies (${pkg}) may have changed, but lockfile (${pkgLock}) has not been updated.`;
 const getPkgMissingLogMesssage = (pkg: string, pkgLock: string) =>
@@ -104,9 +107,9 @@ type Options = {
  */
 const checkLockfile = async (options: Options = {}) => {
   const {
-    logType = "message",
-    lockfile = DEFAULT_LOCKFILENAME,
-    path = "",
+    logType = DEFAULT_LOG_TYPE,
+    lockfile = DEFAULT_LOCKFILE,
+    path = DEFAULT_PATH,
   } = options;
 
   const {

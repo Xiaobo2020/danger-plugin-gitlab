@@ -7,8 +7,20 @@
 import { checkLockfile } from "danger-plugin-gitlab";
 
 checkLockfile({
+  lockType: "warn",
+  lockfile: "package-lock.json",
+  path: "",
+});
+
+checkLockfile({
+  lockType: "fail",
+  lockfile: "yarn.lock",
+  path: "packages/webapp/",
+});
+
+checkLockfile({
   logType: "message",
-  lockfilename: "package-lock.json",
+  lockfile: "package-lock.json",
   path: "packages/server/",
 });
 ```
