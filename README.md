@@ -28,13 +28,13 @@ checkChangelog({
 
 ## TODO
 
-- [ ] checkAutomatedTest
 - [ ] checkJiraIssue
 - [ ] ...
 
 ## Library
 
 - [addLabel](./src/libs/addLabel/index.md)
+- [checkAutomatedTest](./src/libs/checkAutomatedTest/index.md)
 - [checkChangelog](./src/libs/checkChangelog/index.md)
 - [checkDescription](./src/libs/checkDescription/index.md)
 - [checkLockfile](./src/libs/checkLockfile/index.md)

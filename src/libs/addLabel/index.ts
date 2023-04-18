@@ -1,4 +1,4 @@
-import { getChangedFiles, getDanger, inCommitGrep } from "../../utils";
+import { getDanger, inCommitGrep } from "../../utils";
 
 type Label = {
   match: RegExp;
@@ -13,10 +13,8 @@ const addLabel = (labels: Label[] = []) => {
   } = getDanger();
 
   if (labels.length > 0) {
-    const changedFiles = getChangedFiles();
-
     labels.forEach(({ match, name }) => {
-      if (inCommitGrep(match, changedFiles)) {
+      if (inCommitGrep(match)) {
         addLabels(name);
       }
     });

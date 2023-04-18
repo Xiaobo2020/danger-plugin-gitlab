@@ -1,4 +1,4 @@
-import { getDanger } from "../../utils";
+import { getDanger } from "../getDangerModule";
 
 const isExternal = () => {
   const {

@@ -1,5 +1,5 @@
-import { getFail, getMarkdown, getMessage, getWarn } from "../../utils";
-import type { LogType } from "../../utils";
+import { getFail, getMarkdown, getMessage, getWarn } from "../getDangerModule";
+import type { LogType } from "../getDangerModule";
 
 function getLogger(logType: "fail"): ReturnType<typeof getFail>;
 function getLogger(logType: "warn"): ReturnType<typeof getWarn>;

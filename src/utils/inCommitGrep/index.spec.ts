@@ -1,43 +1,28 @@
 import { beforeEach, describe, expect, it, Mock, vi } from "vitest";
 import inCommitGrep from ".";
-import getChangedFiles from "../getChangedFiles";
+import { getDanger } from "../getDangerModule";
 
-vi.mock("../getChangedFiles", () => ({
-  default: vi.fn(),
+vi.mock("../getDangerModule", () => ({
+  getDanger: vi.fn(),
 }));
 
 describe("inCommitGrep", () => {
   beforeEach(() => {
     vi.resetAllMocks();
-  });
-
-  it("should return true when pattern is included in changed files", () => {
-    const result = inCommitGrep(/packages\/webapp\/.*/, [
-      "packages/webapp/package.json",
-    ]);
-    expect(result).toBe(true);
-  });
-
-  it("should return false when pattern is excluded in changed files", () => {
-    const result = inCommitGrep(/packages\/webapp\/.*/, [
-      "packages/server/package.json",
-    ]);
-    expect(result).toBe(false);
+    (getDanger as Mock).mockReturnValue({
+      git: {
+        modified_files: ["packages/webapp/package.json"],
+      },
+    });
   });
 
   it("should return true when pattern is included in changed files got from getChangedFiles()", () => {
-    (getChangedFiles as Mock).mockReturnValue(["packages/webapp/package.json"]);
-
-    const result = inCommitGrep(/packages\/webapp\/.*/);
-
-    expect(result).toBe(true);
+    const pattern = /packages\/webapp\/.*/;
+    expect(inCommitGrep(pattern)).toBe(true);
   });
 
   it("should return false when pattern is included in changed files got from getChangedFiles()", () => {
-    (getChangedFiles as Mock).mockReturnValue(["packages/server/package.json"]);
-
-    const result = inCommitGrep(/packages\/webapp\/.*/);
-
-    expect(result).toBe(false);
+    const pattern = /packages\/server\/.*/;
+    expect(inCommitGrep(pattern)).toBe(false);
   });
 });

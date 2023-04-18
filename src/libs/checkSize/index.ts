@@ -1,5 +1,5 @@
-import { getDanger, getLogger } from "../../utils";
 import type { LogType } from "../../utils";
+import { getDanger, getLogger } from "../../utils";
 
 const DEFAULT_LOG_TYPE = "fail";
 const getDefaultLogMessage = ({

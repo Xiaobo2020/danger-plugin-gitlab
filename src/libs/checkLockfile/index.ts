@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
-import { getAddedLines, getDanger, getLogger } from "../../utils";
 import type { LogType } from "../../utils";
+import { getAddedLines, getDanger, getLogger } from "../../utils";
 
 const DEFAULT_LOG_TYPE = "warn";
 const DEFAULT_LOCKFILE = "package-lock.json";

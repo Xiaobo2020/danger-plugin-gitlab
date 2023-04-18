@@ -1,20 +1,13 @@
 import { beforeEach, describe, expect, it, Mock, vi } from "vitest";
 import addLabel from ".";
 
-import { getDanger, getChangedFiles } from "../../utils";
+import { getDanger } from "../../utils";
 
 const mockAddLabels = vi.fn();
 
-vi.mock("../../utils", async () => {
-  const actualModule: typeof import("../../utils") = await vi.importActual(
-    "../../utils"
-  );
-  return {
-    ...actualModule,
-    getChangedFiles: vi.fn(),
-    getDanger: vi.fn(),
-  };
-});
+vi.mock("../../utils/getDangerModule", () => ({
+  getDanger: vi.fn(),
+}));
 
 describe("addLabel", () => {
   beforeEach(() => {
@@ -33,7 +26,6 @@ describe("addLabel", () => {
         },
       },
     });
-    (getChangedFiles as Mock).mockReturnValue(modifiedFiles);
   });
 
   it("should call danger.gitlab.utils.addLabels when all matched", () => {
