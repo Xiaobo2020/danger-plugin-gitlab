@@ -13,6 +13,18 @@ describe("checkDescription", () => {
     vi.resetAllMocks();
   });
 
+  it("should call log function when description is undefined", () => {
+    (getDanger as Mock).mockReturnValue({
+      gitlab: {
+        mr: {
+          description: undefined,
+        },
+      },
+    });
+    checkDescription();
+    expect(mockLogger).toHaveBeenCalled();
+  });
+
   it("should call log function when length of description is less than default min length", () => {
     (getDanger as Mock).mockReturnValue({
       gitlab: {
@@ -46,6 +58,18 @@ describe("checkDescription", () => {
       },
     });
     checkDescription({ minLength: 10 });
+    expect(mockLogger).toHaveBeenCalled();
+  });
+
+  it("should call log function when custom min length is NaN", () => {
+    (getDanger as Mock).mockReturnValue({
+      gitlab: {
+        mr: {
+          description: "foo bar",
+        },
+      },
+    });
+    checkDescription({ minLength: NaN });
     expect(mockLogger).toHaveBeenCalled();
   });
 

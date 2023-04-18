@@ -16,7 +16,7 @@ const hasDepsChanged = (
   endLine: number,
   addedLines: number[]
 ) =>
-  startLine < 0
+  startLine < 0 || startLine > endLine
     ? false
     : addedLines.reduce(
         (alreadyChanged, ln) =>

@@ -49,4 +49,16 @@ describe("getLogger", () => {
 
     expect(addedLines).toEqual([5, 15]);
   });
+  it("should return empty arrow when structuredDiffForFile returns undefined", async () => {
+    mockStructuredDiffForFile.mockReturnValue(Promise.resolve(undefined));
+    (getDanger as Mock).mockReturnValue({
+      git: {
+        structuredDiffForFile: mockStructuredDiffForFile,
+      },
+    });
+
+    const addedLines = await getAddedLines("package.json");
+
+    expect(addedLines).toEqual([]);
+  });
 });
