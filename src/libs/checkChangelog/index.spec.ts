@@ -28,36 +28,49 @@ describe("checkChangelog", () => {
     expect(mockLogger).not.toHaveBeenCalled();
   });
 
-  it("should not call log function when check message is checked", () => {
+  it("should not call log function when custom log file exists.", () => {
     (getDanger as Mock).mockReturnValue({
       git: {
-        modified_files: ["a.txt"],
+        modified_files: ["a.txt", "CHANGELOG.md"],
       },
       gitlab: {
         mr: {
-          description:
-            "[x] This is a trival MR and no CHANGELOG changes required.",
+          description: "",
         },
       },
     });
-    checkChangelog();
+    checkChangelog({ logFile: "CHANGELOG.md" });
     expect(mockLogger).not.toHaveBeenCalled();
   });
 
-  it("should call log function when check message is not checked", () => {
+  it("should call log function when changelog.md does not exists and skip unchecked", () => {
     (getDanger as Mock).mockReturnValue({
       git: {
         modified_files: ["a.txt"],
       },
       gitlab: {
         mr: {
-          description:
-            "[ ] This is a trival MR and no CHANGELOG changes required.",
+          description: "[ ] Skip check CHANGELOG",
         },
       },
     });
-    checkChangelog();
+    checkChangelog({ enableSkip: true, skipMessage: "Skip check CHANGELOG" });
     expect(mockLogger).toHaveBeenCalled();
+  });
+
+  it("should not call log function when changelog.md does not exists but skip checked", () => {
+    (getDanger as Mock).mockReturnValue({
+      git: {
+        modified_files: ["a.txt"],
+      },
+      gitlab: {
+        mr: {
+          description: "[x] Skip check CHANGELOG",
+        },
+      },
+    });
+    checkChangelog({ enableSkip: true, skipMessage: "Skip check CHANGELOG" });
+    expect(mockLogger).not.toHaveBeenCalled();
   });
 
   it("should call log function with custom log message", () => {

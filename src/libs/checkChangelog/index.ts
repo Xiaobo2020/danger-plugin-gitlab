@@ -1,15 +1,21 @@
-import { getDanger, getLogger } from "../../utils";
 import type { LogType } from "../../utils";
+import { getDanger, getLogger } from "../../utils";
 
-const DEFAULT_CHECK_MESSAGE =
-  "This is a trival MR and no CHANGELOG changes required.";
+const DEFAULT_LOG_FILE = "changelog.md";
+const DEFAULT_LOG_TYPE = "warn";
 const DEFAULT_LOG_MESSAGE = "Please add a changelog entry for your changes.";
 
+const DEFAULT_SKIP_MESSAGE =
+  "This is a trival MR and no CHANGELOG changes required.";
+
 type Options = {
-  filename?: string;
+  logFile?: string;
+
   logType?: LogType;
-  checkMessage?: string;
   logMessage?: string;
+
+  enableSkip?: boolean;
+  skipMessage?: string;
 };
 
 /**
@@ -17,10 +23,13 @@ type Options = {
  */
 const checkChangelog = (options: Options = {}) => {
   const {
-    filename = "changelog.md",
-    logType = "warn",
-    checkMessage = DEFAULT_CHECK_MESSAGE,
+    logFile = DEFAULT_LOG_FILE,
+
+    logType = DEFAULT_LOG_TYPE,
     logMessage = DEFAULT_LOG_MESSAGE,
+
+    enableSkip = false,
+    skipMessage = DEFAULT_SKIP_MESSAGE,
   } = options;
 
   const {
@@ -30,10 +39,12 @@ const checkChangelog = (options: Options = {}) => {
     },
   } = getDanger();
 
-  const hasChangelog = modifiedFiles.includes(filename);
-  const isTrival = description.includes(`[x] ${checkMessage}`);
+  const hasChangelog = modifiedFiles.includes(logFile);
+  const isSkip = enableSkip
+    ? description.indexOf(`[x] ${skipMessage}`) !== -1
+    : false;
 
-  if (!isTrival && !hasChangelog) {
+  if (!hasChangelog && !isSkip) {
     const logger = getLogger(logType as any);
     logger(logMessage);
   }
