@@ -1,4 +1,4 @@
-import getChangedFiles from "../getChangedFiles";
+import { getChangedFiles } from "../../utils";
 
 /**
  * Check if target pattern is included in changed files
@@ -6,9 +6,12 @@ import getChangedFiles from "../getChangedFiles";
 const inCommitGrep = (
   pattern: RegExp,
   changedFiles: string[] = getChangedFiles()
-) =>
-  changedFiles.findIndex(
-    (filename) => filename && filename.match(pattern) !== null
-  ) >= 0;
+) => {
+  return (
+    changedFiles.findIndex(
+      (filename) => filename && filename.match(pattern) !== null
+    ) >= 0
+  );
+};
 
 export default inCommitGrep;
