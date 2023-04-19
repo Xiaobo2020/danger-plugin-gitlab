@@ -1,6 +1,6 @@
 # Danger Plugins For GitLab
 
-> Some useful DangerJS plugins for use in Gitlab
+> Some simple but useful DangerJS plugins for Gitlab
 
 ## Install
 
