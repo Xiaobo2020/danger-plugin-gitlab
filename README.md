@@ -1,5 +1,7 @@
 # Danger Plugins For GitLab
 
+> Some useful DangerJS plugins for use in Gitlab
+
 ## Install
 
 ```bash
@@ -26,13 +28,7 @@ checkChangelog({
 });
 ```
 
-## TODO
-
-- [ ] checkMaunallyTested
-- [ ] checkSimultaneouslyDeploy
-- [ ] ...
-
-## Library
+## Plugins
 
 - [addLabel](./src/libs/addLabel/index.md)
 - [checkAutomatedTest](./src/libs/checkAutomatedTest/index.md)
@@ -42,3 +38,9 @@ checkChangelog({
 - [checkLockfile](./src/libs/checkLockfile/index.md)
 - [checkSelfReview](./src/libs/checkSelfReview/index.md)
 - [checkSize](./src/libs/checkSize/index.md)
+
+## TODO
+
+- [ ] checkMaunallyTested
+- [ ] checkSimultaneouslyDeploy
+- [ ] ...
