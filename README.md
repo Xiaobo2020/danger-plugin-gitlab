@@ -29,7 +29,6 @@ checkChangelog({
 ## TODO
 
 - [ ] checkJiraIssue
-- [ ] ...
 
 ## Library
 
@@ -43,7 +42,8 @@ checkChangelog({
 ## Util
 
 - [getAddedLines](./src/utils/getAddedLines/index.md)
-- [getChangedFiles](./src/utils/getChangedFiles/index.md)
 - [getDangerModule](./src/utils/getDangerModule/index.md)
 - [getLogger](./src/utils/getLogger/index.md)
+- [inCommit](./src/utils/inCommit/index.md)
+- [inCommitGrep](./src/utils/inCommitGrep/index.md)
 - [isExternal](./src/utils/isExternal/index.md)
