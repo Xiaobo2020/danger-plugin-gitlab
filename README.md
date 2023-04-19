@@ -28,7 +28,7 @@ checkChangelog({
 
 ## TODO
 
-- [ ] checkJiraIssue
+- [ ] ...
 
 ## Library
 
@@ -36,6 +36,7 @@ checkChangelog({
 - [checkAutomatedTest](./src/libs/checkAutomatedTest/index.md)
 - [checkChangelog](./src/libs/checkChangelog/index.md)
 - [checkDescription](./src/libs/checkDescription/index.md)
+- [checkIssue](./src/libs/checkIssue/index.md)
 - [checkLockfile](./src/libs/checkLockfile/index.md)
 - [checkSize](./src/libs/checkSize/index.md)
 
