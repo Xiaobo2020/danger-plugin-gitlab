@@ -28,6 +28,8 @@ checkChangelog({
 
 ## TODO
 
+- [ ] checkMaunallyTested
+- [ ] checkSimultaneouslyDeploy
 - [ ] ...
 
 ## Library
@@ -38,6 +40,7 @@ checkChangelog({
 - [checkDescription](./src/libs/checkDescription/index.md)
 - [checkIssue](./src/libs/checkIssue/index.md)
 - [checkLockfile](./src/libs/checkLockfile/index.md)
+- [checkSelfReview](./src/libs/checkSelfReview/index.md)
 - [checkSize](./src/libs/checkSize/index.md)
 
 ## Util
