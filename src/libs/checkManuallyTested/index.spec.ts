@@ -151,7 +151,7 @@ describe("checkManuallyTested", () => {
 
     it("source files modified and custom check message in description unchecked with custom log message (function type)", () => {
       const checkMessage = "custom check message";
-      const logMessage = (checkMessage: string) =>
+      const logMessage = () =>
         `custom log message with checkMessage: ${checkMessage}`;
       (getDanger as Mock).mockReturnValue({
         git: {
@@ -165,7 +165,7 @@ describe("checkManuallyTested", () => {
       });
 
       checkManuallyTested({ checkMessage, logMessage });
-      expect(mockLogger).toHaveBeenCalledWith(logMessage(checkMessage));
+      expect(mockLogger).toHaveBeenCalledWith(logMessage());
     });
   });
 });

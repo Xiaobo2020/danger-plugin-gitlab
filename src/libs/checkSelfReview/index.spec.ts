@@ -83,8 +83,7 @@ describe("checkSelfReview", () => {
 
     it("custom check message in description is unchecked with custom log message (function type)", () => {
       const checkMessage = "custom check message";
-      const logMessage = (checkMessage: string) =>
-        `custom log message with ${checkMessage}`;
+      const logMessage = () => `custom log message with ${checkMessage}`;
       (getDanger as Mock).mockReturnValue({
         gitlab: {
           mr: {
@@ -93,7 +92,7 @@ describe("checkSelfReview", () => {
         },
       });
       checkSelfReview({ checkMessage, logMessage });
-      expect(mockLogger).toHaveBeenCalledWith(logMessage(checkMessage));
+      expect(mockLogger).toHaveBeenCalledWith(logMessage());
     });
   });
 });
