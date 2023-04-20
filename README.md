@@ -10,22 +10,24 @@ npm install -D danger-plugin-gitlab
 
 ## Usage
 
+### Import
+
 ```javascript
+// dangerfile.{js|ts}
+
 // ESModule
 import { checkChangelog } from "danger-plugin-gitlab";
-
 // or CommonJS
 const { checkChangelog } = require("danger-plugin-gitlab");
+```
 
-// use enforceChangelog with default options
+### Setup
+
+```javascript
+// dangerfile.{js|ts}
+
+// use `checkChangelog` to check CHANGELOG in merge request
 checkChangelog();
-
-// or custom the options
-checkChangelog({
-  logFile: "changelog.md",
-  logType: "warn",
-  logMessage: "Please add a changelog entry for your changes.",
-});
 ```
 
 ## Plugins
@@ -36,11 +38,11 @@ checkChangelog({
 - [checkDescription](./src/libs/checkDescription/index.md)
 - [checkIssue](./src/libs/checkIssue/index.md)
 - [checkLockfile](./src/libs/checkLockfile/index.md)
+- [checkManuallyTested](./src/libs/checkManuallyTested/index.md)
 - [checkSelfReview](./src/libs/checkSelfReview/index.md)
 - [checkSize](./src/libs/checkSize/index.md)
 
 ## TODO
 
-- [ ] checkMaunallyTested
 - [ ] checkSimultaneouslyDeploy
 - [ ] ...
