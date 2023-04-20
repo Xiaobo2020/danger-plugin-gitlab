@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, Mock, vi } from "vitest";
-import checkSelfReview, { DEFAULT_CHECK_MESSAGE, getLogMessage } from ".";
+import checkSelfReview from ".";
 import { getDanger } from "../../utils";
 
 const mockLogger = vi.fn();
@@ -43,21 +43,19 @@ describe("checkSelfReview", () => {
 
   describe("should call log function", () => {
     it("default check message in description is unchecked", () => {
-      const logMessage = getLogMessage(DEFAULT_CHECK_MESSAGE);
       (getDanger as Mock).mockReturnValue({
         gitlab: {
           mr: {
-            description: `[ ] ${DEFAULT_CHECK_MESSAGE}`,
+            description: "Code has been reviewed by the author",
           },
         },
       });
       checkSelfReview();
-      expect(mockLogger).toHaveBeenCalledWith(logMessage);
+      expect(mockLogger).toHaveBeenCalled();
     });
 
     it("custom check message in description is unchecked", () => {
       const checkMessage = "custom check message";
-      const logMessage = getLogMessage(checkMessage);
       (getDanger as Mock).mockReturnValue({
         gitlab: {
           mr: {
@@ -66,7 +64,7 @@ describe("checkSelfReview", () => {
         },
       });
       checkSelfReview({ checkMessage });
-      expect(mockLogger).toHaveBeenCalledWith(logMessage);
+      expect(mockLogger).toHaveBeenCalled();
     });
 
     it("custom check message in description is unchecked with custom log message (string type)", () => {

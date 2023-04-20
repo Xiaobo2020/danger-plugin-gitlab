@@ -2,7 +2,7 @@ import { inCommitGrep, LogType } from "../../utils";
 import { getDanger, getLogger } from "../../utils";
 
 const DEFAULT_LOG_TYPE = "fail";
-export const DEFAULT_CHECK_MESSAGE = "Manually tested in a web browser";
+const DEFAULT_CHECK_MESSAGE = "Manually tested in a web browser";
 const DEFAULT_SOURCE_FILE_MATCH = /src\/.*.(?<!test.)(js|ts|jsx|tsx)$/;
 const getLogMessage = (checkMessage: string) =>
   `\`${checkMessage}\` is unchecked in the MR description when source files have been modified.\n\n` +

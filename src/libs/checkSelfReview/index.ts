@@ -2,8 +2,8 @@ import type { LogType } from "../../utils";
 import { getDanger, getLogger } from "../../utils";
 
 const DEFAULT_LOG_TYPE = "warn";
-export const DEFAULT_CHECK_MESSAGE = "Code has been reviewed by the author";
-export const getLogMessage = (checkMessage: string) =>
+const DEFAULT_CHECK_MESSAGE = "Code has been reviewed by the author";
+const getLogMessage = (checkMessage: string) =>
   `\`${checkMessage}\` is unchecked in the MR description.\n\n` +
   "* Please ensure you have read through your code changes in 'Files changed' _before_ asking others to review your MR. " +
   "This helps catch obvious errors and typos, which avoids wasting your time and the reviewer's time, and ultimately allows us to " +
