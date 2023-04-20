@@ -13,7 +13,7 @@ const getLogMessage = (checkMessage: string) =>
 
 type Options = {
   logType?: LogType;
-  logMessage?: string | ((checkMessage: string) => string);
+  logMessage?: string | (() => string);
   checkMessage?: string;
 };
 
@@ -38,7 +38,7 @@ const checkSelfReview = (options: Options = {}) => {
   if (!hasSelfReviewed) {
     const logger = getLogger(logType as any);
     const msg =
-      typeof logMessage === "string" ? logMessage : logMessage(checkMessage);
+      typeof logMessage === "string" ? logMessage : String(logMessage());
 
     logger(msg);
   }

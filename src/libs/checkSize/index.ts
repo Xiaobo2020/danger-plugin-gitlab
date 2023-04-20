@@ -32,7 +32,11 @@ type Options = {
   enableSkip?: boolean;
   skipMessage?: string;
 
-  logMessage?: string | ((options: GetLogMessageOptions) => string);
+  logMessage?:
+    | string
+    | ((
+        options: Pick<GetLogMessageOptions, "createdFiles" | "modifiedFiles">
+      ) => string);
 };
 
 const checkSize = (options: Options = {}) => {
@@ -70,7 +74,7 @@ const checkSize = (options: Options = {}) => {
     const msg =
       typeof logMessage === "string"
         ? logMessage
-        : logMessage({ enableSkip, skipMessage, createdFiles, modifiedFiles });
+        : String(logMessage({ createdFiles, modifiedFiles }));
     logger(msg);
   }
 };

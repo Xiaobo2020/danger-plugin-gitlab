@@ -25,9 +25,7 @@ const getLogMessage = ({ enableCheck, checkMessage }: GetLogMessageOptions) => {
 
 type Options = {
   logType?: LogType;
-  logMessage?:
-    | string
-    | ((params: { enableCheck: boolean; checkMessage: string }) => string);
+  logMessage?: string | (() => string);
 
   sourceFileMatch?: RegExp;
   testFileMatch?: RegExp;
@@ -63,9 +61,7 @@ const checkAutomatedTest = (options: Options = {}) => {
   if (sourceFileChanged && !testFileChanged && !testFileUpdated) {
     const logger = getLogger(logType as any);
     const msg =
-      typeof logMessage === "string"
-        ? logMessage
-        : logMessage({ enableCheck, checkMessage });
+      typeof logMessage === "string" ? logMessage : String(logMessage());
     logger(msg);
   }
 };
