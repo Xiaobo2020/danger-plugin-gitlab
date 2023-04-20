@@ -1,29 +1,15 @@
 # checkSelfReview
 
-Check if the code has been reviewed by the author.
+Hard fail if author has not reviewed their code.
 
 ```javascript
+// dangerfile.{js|ts}
 import { checkSelfReview } from "danger-plugin-gitlab";
 
-// default checkMessage
-checkSelfReview({
-  checkMessage: "Code has been reviewed by the author",
-});
-
-// custom logMessage
-checkSelfReview({
-  logMessage:
-    "This is custom log message that will be logged when check failed",
-});
-
-// or logMessage with function type
-checkSelfReview({
-  logMessage: (checkMessage: string) =>
-    `This is a function to get log message with param checkMessage: ${checkMessage}`,
-});
+checkSelfReview();
 ```
 
-Make use below content is inserted into the merge request description. If the code has been reviewed by the author, let the checkbox checked.
+Make use below content is inserted into the merge request description.
 
 ```markdown
 <!-- gitlab mr template -->
@@ -32,3 +18,11 @@ Make use below content is inserted into the merge request description. If the co
 
 - [ ] Code has been reviewed by the author
 ```
+
+## Options
+
+| prop         | type                                           | required | default                                                 | description                                               |
+| ------------ | ---------------------------------------------- | -------- | ------------------------------------------------------- | --------------------------------------------------------- |
+| logType      | `"fail"`\|`"warn"`\|`"message"`\|`"markdown"`  | `false`  | `"fail"`                                                | The type of log function                                  |
+| checkMessage | `string`                                       | `false`  | `"Code has been reviewed by the author"`                | The target message used in the description to be checked  |
+| logMessage   | `string`\|`((checkMessage: string) => string)` | `false`  | `"${checkMessage} is unchecked in the MR description."` | The log message that will be printed when the check fails |
