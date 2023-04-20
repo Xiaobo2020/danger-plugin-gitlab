@@ -1,6 +1,6 @@
 # addLabel
 
-Add labels to MR.
+Add labels according to the changed files.
 
 ```javascript
 import { addLabel } from "danger-plugin-gitlab";
