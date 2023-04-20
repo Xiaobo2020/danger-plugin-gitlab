@@ -5,13 +5,11 @@ const DEFAULT_LOG_TYPE = "fail";
 const DEFAULT_SOURCE_FILE_MATCH = /src\/.*.(?<!test.)(js|ts|jsx|tsx)$/;
 const DEFAULT_TEST_FILE_MATCH = /src\/.*test.*(js|jsx|ts|tsx)$/;
 const DEFAULT_CHECK_MESSAGE = "Automated tests added/updated";
-const getDefaultLogMessage = ({
-  enableCheck,
-  checkMessage,
-}: {
+type GetLogMessageOptions = {
   enableCheck: boolean;
   checkMessage: string;
-}) => {
+};
+const getLogMessage = ({ enableCheck, checkMessage }: GetLogMessageOptions) => {
   const msg1 =
     "Source files have been modified, but no test files have been added or modified.";
   const msg2 =
@@ -27,7 +25,9 @@ const getDefaultLogMessage = ({
 
 type Options = {
   logType?: LogType;
-  logMessage?: string;
+  logMessage?:
+    | string
+    | ((params: { enableCheck: boolean; checkMessage: string }) => string);
 
   sourceFileMatch?: RegExp;
   testFileMatch?: RegExp;
@@ -39,13 +39,13 @@ type Options = {
 const checkAutomatedTest = (options: Options = {}) => {
   const {
     logType = DEFAULT_LOG_TYPE,
-    logMessage,
 
     sourceFileMatch = DEFAULT_SOURCE_FILE_MATCH,
     testFileMatch = DEFAULT_TEST_FILE_MATCH,
 
     enableCheck = false,
     checkMessage = DEFAULT_CHECK_MESSAGE,
+    logMessage = getLogMessage({ enableCheck, checkMessage }),
   } = options;
 
   const {
@@ -62,7 +62,11 @@ const checkAutomatedTest = (options: Options = {}) => {
 
   if (sourceFileChanged && !testFileChanged && !testFileUpdated) {
     const logger = getLogger(logType as any);
-    logger(logMessage || getDefaultLogMessage({ enableCheck, checkMessage }));
+    const msg =
+      typeof logMessage === "string"
+        ? logMessage
+        : logMessage({ enableCheck, checkMessage });
+    logger(msg);
   }
 };
 
