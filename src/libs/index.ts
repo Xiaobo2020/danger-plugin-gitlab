@@ -1,3 +1,5 @@
+export { default as addLabel } from "./addLabel";
+export { default as checkAutomatedTest } from "./checkAutomatedTest";
 export { default as checkChangelog } from "./checkChangelog";
 export { default as checkDescription } from "./checkDescription";
 export { default as checkIssue } from "./checkIssue";
