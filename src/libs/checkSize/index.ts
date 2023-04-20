@@ -2,18 +2,21 @@ import type { LogType } from "../../utils";
 import { getDanger, getLogger } from "../../utils";
 
 const DEFAULT_LOG_TYPE = "fail";
-const getDefaultLogMessage = ({
-  createdFiles,
-  modifiedFiles,
+const DEFAULT_MAX_SIZE = 20;
+const DEFAULT_SKIP_MESSAGE = "Skip MR size check";
 
-  enableSkip,
-  skipMessage,
-}: {
+type GetLogMessageOptions = {
   createdFiles: string[];
   modifiedFiles: string[];
   enableSkip: boolean;
   skipMessage: string;
-}) => {
+};
+const getLogMessage = ({
+  createdFiles,
+  modifiedFiles,
+  enableSkip,
+  skipMessage,
+}: GetLogMessageOptions) => {
   const changedFiles = [...createdFiles, ...modifiedFiles];
   if (enableSkip) {
     return `This MR contains ${changedFiles.length} files (${createdFiles.length} new, ${modifiedFiles.length} modified). Consider splitting it into multiple MRs. Otherwise toggle the danger check '[ ] ${skipMessage}' in the MR template`;
@@ -22,34 +25,17 @@ const getDefaultLogMessage = ({
   return `This MR contains ${changedFiles.length} files (${createdFiles.length} new, ${modifiedFiles.length} modified). Consider splitting it into multiple MRs.`;
 };
 
-// const DEFAULT_SIZE_UNIT = "file";
-const DEFAULT_MAX_SIZE = 20;
-const DEFAULT_SKIP_MESSAGE = "Skip MR size check";
-
-// TODO: 'line'
-type SizeUnit = "file";
-
 type Options = {
   logType?: LogType;
-  logMessage?: string;
-  sizeUnit?: SizeUnit;
   maxSize?: number;
 
   enableSkip?: boolean;
   skipMessage?: string;
+
+  logMessage?: string | ((options: GetLogMessageOptions) => string);
 };
 
 const checkSize = (options: Options = {}) => {
-  const {
-    enableSkip = false,
-    skipMessage = DEFAULT_SKIP_MESSAGE,
-
-    logType = DEFAULT_LOG_TYPE,
-    logMessage,
-    // sizeUnit = DEFAULT_SIZE_UNIT,
-    maxSize = DEFAULT_MAX_SIZE,
-  } = options;
-
   const {
     git: {
       modified_files: modifiedFiles = [],
@@ -60,6 +46,20 @@ const checkSize = (options: Options = {}) => {
     },
   } = getDanger();
 
+  const {
+    enableSkip = false,
+    skipMessage = DEFAULT_SKIP_MESSAGE,
+
+    logType = DEFAULT_LOG_TYPE,
+    maxSize = DEFAULT_MAX_SIZE,
+    logMessage = getLogMessage({
+      enableSkip,
+      skipMessage,
+      createdFiles,
+      modifiedFiles,
+    }),
+  } = options;
+
   const isBig = [...createdFiles, ...modifiedFiles].length > maxSize;
   const isSkip = enableSkip
     ? description.includes(`[x] ${skipMessage}`)
@@ -67,15 +67,11 @@ const checkSize = (options: Options = {}) => {
 
   if (isBig && !isSkip) {
     const logger = getLogger(logType as any);
-    logger(
-      logMessage ||
-        getDefaultLogMessage({
-          createdFiles,
-          modifiedFiles,
-          enableSkip,
-          skipMessage,
-        })
-    );
+    const msg =
+      typeof logMessage === "string"
+        ? logMessage
+        : logMessage({ enableSkip, skipMessage, createdFiles, modifiedFiles });
+    logger(msg);
   }
 };
 
