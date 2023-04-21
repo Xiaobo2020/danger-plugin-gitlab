@@ -39,10 +39,10 @@ checkChangelog();
 - [checkIssue](./src/libs/checkIssue/index.md)
 - [checkLockfile](./src/libs/checkLockfile/index.md)
 - [checkManuallyTested](./src/libs/checkManuallyTested/index.md)
+- [checkMutexUpdate](./src/libs/checkMutexUpdate/index.md)
 - [checkSelfReview](./src/libs/checkSelfReview/index.md)
 - [checkSize](./src/libs/checkSize/index.md)
 
 ## TODO
 
-- [ ] checkSimultaneouslyDeploy
 - [ ] ...
