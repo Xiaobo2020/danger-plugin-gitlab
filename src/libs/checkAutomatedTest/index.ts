@@ -48,14 +48,14 @@ const checkAutomatedTest = (options: Options = {}) => {
 
   const {
     gitlab: {
-      mr: { description },
+      mr: { description = "" },
     },
   } = getDanger();
 
   const sourceFileChanged = inCommitGrep(sourceFileMatch);
   const testFileChanged = inCommitGrep(testFileMatch);
   const testFileUpdated = enableCheck
-    ? (description || "").includes(`[x] ${checkMessage}`)
+    ? description.includes(`[x] ${checkMessage}`)
     : false;
 
   if (sourceFileChanged && !testFileChanged && !testFileUpdated) {
