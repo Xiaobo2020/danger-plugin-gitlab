@@ -42,3 +42,11 @@ checkChangelog();
 - [checkMutexUpdate](./src/libs/checkMutexUpdate/index.md)
 - [checkSelfReview](./src/libs/checkSelfReview/index.md)
 - [checkSize](./src/libs/checkSize/index.md)
+
+## Deploy
+
+```bash
+npm install --registry=https://registry.npmjs.org/
+
+npm publish
+```
