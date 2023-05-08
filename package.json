@@ -1,7 +1,7 @@
 {
   "name": "danger-plugin-gitlab",
-  "private": true,
   "version": "0.0.1",
+  "description": "Some simple but useful DangerJS plugins for Gitlab",
   "type": "module",
   "main": "./dist/libs/index.cjs",
   "module": "./dist/libs/index.js",
@@ -19,6 +19,26 @@
   "files": [
     "dist/*"
   ],
+  "keywords": [
+    "danger",
+    "plugin",
+    "gitlab",
+    "label",
+    "changelog",
+    "lockfile",
+    "jira",
+    "size"
+  ],
+  "author": "Xiaobo2020",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xiaobo2020/danger-plugin-gitlab.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Xiaobo2020/danger-plugin-gitlab/issues"
+  },
+  "homepage": "https://github.com/Xiaobo2020/danger-plugin-gitlab#readme",
   "scripts": {
     "clean": "rm -rf dist/",
     "dev": "vite",
