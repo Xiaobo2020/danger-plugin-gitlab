@@ -40,15 +40,17 @@
   },
   "homepage": "https://github.com/Xiaobo2020/danger-plugin-gitlab#readme",
   "scripts": {
-    "clean": "rimraf ./dist",
     "dev": "vite",
+    "coverage": "vitest run --coverage",
+    "preview": "vite preview",
     "tsc": "tsc",
     "test": "vitest",
-    "coverage": "vitest run --coverage",
-    "build": "npm run clean && npm run tsc && npm run build:types && npm run build:libs",
+    "clean": "rimraf ./dist",
+    "build": "npm run build:types && npm run build:libs",
     "build:libs": "vite build",
     "build:types": "tsc --project tsconfig.build.json",
-    "preview": "vite preview"
+    "prepublishOnly": "npm run tsc && npm run test && npm run clean",
+    "prepare": "npm run clean && npm run build"
   },
   "devDependencies": {
     "@vitest/coverage-c8": "^0.30.1",
