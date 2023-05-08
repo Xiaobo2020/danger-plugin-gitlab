@@ -44,12 +44,13 @@
     "coverage": "vitest run --coverage",
     "preview": "vite preview",
     "tsc": "tsc",
-    "test": "vitest",
+    "test:watch": "vitest watch",
+    "test": "vitest run",
     "clean": "rimraf ./dist",
     "build": "npm run clean && npm run build:types && npm run build:libs",
     "build:libs": "vite build",
     "build:types": "tsc --project tsconfig.build.json",
-    "prepublishOnly": "npm run tsc && npm run test"
+    "prepublishOnly": "npm run tsc && npm run test && npm run build"
   },
   "devDependencies": {
     "@vitest/coverage-c8": "^0.30.1",
