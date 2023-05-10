@@ -8,28 +8,6 @@ Some simple but useful DangerJS plugins for Gitlab
 npm install -D danger-plugin-gitlab
 ```
 
-## Usage
-
-### Import
-
-```javascript
-// dangerfile.{js|ts}
-
-// ESModule
-import { checkChangelog } from "danger-plugin-gitlab";
-// or CommonJS
-const { checkChangelog } = require("danger-plugin-gitlab");
-```
-
-### Setup
-
-```javascript
-// dangerfile.{js|ts}
-
-// use `checkChangelog` to check CHANGELOG in merge request
-checkChangelog();
-```
-
 ## Plugins
 
 - [addLabel](#addlabel)
@@ -39,7 +17,7 @@ checkChangelog();
 - [checkIssueTicket](#checkissueticket)
 - [checkLockfile](#checklockfile)
 - [checkManuallyTested](#checkmanuallytested)
-- [ ] [checkMutexUpdate](./src/libs/checkMutexUpdate/index.md)
+- [checkMutexUpdate](#checkmutexupdate)
 - [checkSelfReview](#checkselfreview)
 - [checkSize](#checksize)
 
@@ -69,20 +47,19 @@ checkAutomatedTest({
     "Source files have been modified, but no test files have been added or modified.",
   sourceFileMath: /src\/.*.(?<!test.)(js|ts|jsx|tsx)$/,
   testFileMath: /src\/.*test.*(js|ts|jsx|tsx)$/,
-
   enableCheck: false,
   checkMessage: "Automated tests added/updated",
 });
 ```
 
-If `enableCheck` is set `true`, you can also add below content into your merge request template to control the behaviour.
+If `enableCheck` is set `true`, you can also add below content into your merge request description to control the behaviour.
 
 ```markdown
-<!-- merge request template -->
+<!-- merge request description -->
 
 # Checklist
 
-- [x] Automated tests added/updated
+- [ ] Automated tests added/updated
 ```
 
 ### checkChangelog
@@ -96,20 +73,19 @@ checkChangelog({
   logFile: "changelog.md",
   logType: "warn",
   logMessage: "Please add a changelog entry for your changes.",
-
   enableSkip: false,
   skipMessage: "Skip CHANGELOG check",
 });
 ```
 
-If `enableSkip` is set `true`, you can also add below content into your merge request template to control the behaviour.
+If `enableSkip` is set `true`, you can also add below content into your merge request description to control the behaviour.
 
 ```markdown
-<!-- merge request template -->
+<!-- merge request description -->
 
 # Skip
 
-- [x] Skip CHANGELOG check
+- [ ] Skip CHANGELOG check
 ```
 
 ### checkDescription
@@ -128,7 +104,7 @@ checkDescription({
 
 ### checkIssueTicket
 
-Check if an ISSUE ticket exists in the title or description of merge request template. Or add `NO-ISSUE` to indicate no issue ticket is required.
+Check if an ISSUE ticket exists in the title or description of merge request description. Or add `NO-ISSUE` to indicate no issue ticket is required.
 
 ```typescript
 import { checkIssueTicket } from "danger-plugin-gitlab";
@@ -137,7 +113,7 @@ checkIssueTicket({
   logType: "warn",
   key: "JIRA",
   location: "title",
-  logMessage: `Please include a ticket (like \`XXX-DDDD\` or \`NO-ISSUE\` if there is no ticket) at the beginning of the MR title`;
+  logMessage: "Please include a ticket (like \`XXX-DDDD\` or \`NO-ISSUE\` if there is no ticket) at the beginning of the MR title";
 });
 ```
 
@@ -154,7 +130,7 @@ checkLockfile({
   lockfile: "package-lock.json",
 });
 
-// or custom path and lockfile
+// or custom log type, path and lockfile
 checkLockfile({
   lockType: "fail",
   lockfile: "yarn.lock",
@@ -181,11 +157,49 @@ checkManuallyTested({
 Make use below content is inserted into the merge request description.
 
 ```markdown
-<!-- merge request template -->
+<!-- merge request description -->
 
 # Checklist
 
 - [ ] Manually tested in a web browser
+```
+
+### checkMutexUpdate
+
+Check if changes have been made to both the server and client code.
+
+```typescript
+import { checkMutexUpdate } from "danger-plugin-gitlab";
+
+const SKIP_SERVER_CLIENT_MUTEX_CHECK =
+  "I am familiar with the danger of releasing webapp and server changes simultaneously";
+
+checkMutexUpdate({
+  logType: "fail",
+  logMessage: `The reviewer must check the \`${SKIP_SERVER_CLIENT_MUTEX_CHECK}\` toggle, or the pull request should be split.`,
+  mutexItems: [
+    {
+      match: /packages\/server\/(?!app\/tests\/).*/,
+      name: "server",
+    },
+    {
+      match: /packages\/client\/.*/,
+      name: "webapp",
+    },
+  ],
+  enableSkip: true,
+  skipMessage: SKIP_SERVER_CLIENT_MUTEX_CHECK,
+});
+```
+
+If `enableSkip` is set `true`, you can also add below content into your merge request description to control the behaviour.
+
+```markdown
+<!-- merge request description -->
+
+# Skip
+
+- [ ] I am familiar with the danger of releasing webapp and server changes simultaneously
 ```
 
 ### checkSelfReview
@@ -206,7 +220,7 @@ checkSelfReview({
 Make use below content or custom check message is inserted into the merge request description.
 
 ```markdown
-<!-- merge request template -->
+<!-- merge request description -->
 
 # Checklist
 
@@ -234,12 +248,12 @@ checkSize({
 });
 ```
 
-If `enableSkip` is set `true`, you can also add below content into your merge request template to control the behaviour.
+If `enableSkip` is set `true`, you can also add below content into your merge request description to control the behaviour.
 
 ```markdown
-<!-- merge request template -->
+<!-- merge request description -->
 
 # Skip
 
-- [x] Skip MR size check
+- [ ] Skip MR size check
 ```
