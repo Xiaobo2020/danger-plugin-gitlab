@@ -38,7 +38,7 @@ checkChangelog();
 - [checkDescription](#checkdescription)
 - [checkIssueTicket](#checkissueticket)
 - [checkLockfile](#checklockfile)
-- [ ] [checkManuallyTested](./src/libs/checkManuallyTested/index.md)
+- [checkManuallyTested](#checkmanuallytested)
 - [ ] [checkMutexUpdate](./src/libs/checkMutexUpdate/index.md)
 - [ ] [checkSelfReview](./src/libs/checkSelfReview/index.md)
 - [ ] [checkSize](./src/libs/checkSize/index.md)
@@ -160,4 +160,30 @@ checkLockfile({
   lockfile: "yarn.lock",
   path: "packages/webapp/",
 });
+```
+
+### checkManuallyTested
+
+Check if author has manually tested their changes when source files have been modified
+
+```typescript
+import { checkManuallyTested } from "danger-plugin-gitlab";
+
+checkManuallyTested({
+  logType: "fail",
+  logMessage:
+    "`Manually tested in a web browser` is unchecked in the MR description when source files have been modified.",
+  checkMessage: "Manually tested in a web browser",
+  sourceFileMath: /src\/.*.(?<!test.)(js|ts|jsx|tsx)$/,
+});
+```
+
+Make use below content is inserted into the merge request description.
+
+```markdown
+<!-- merge request template -->
+
+# Checklist
+
+- [ ] Manually tested in a web browser
 ```
