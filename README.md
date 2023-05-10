@@ -41,7 +41,7 @@ checkChangelog();
 - [checkManuallyTested](#checkmanuallytested)
 - [ ] [checkMutexUpdate](./src/libs/checkMutexUpdate/index.md)
 - [ ] [checkSelfReview](./src/libs/checkSelfReview/index.md)
-- [ ] [checkSize](./src/libs/checkSize/index.md)
+- [checkSize](#checksize)
 
 ### addLabel
 
@@ -130,7 +130,7 @@ checkDescription({
 
 Check if an ISSUE ticket exists in the title or description of merge request template. Or add `NO-ISSUE` to indicate no issue ticket is required.
 
-```javascript
+```typescript
 import { checkIssueTicket } from "danger-plugin-gitlab";
 
 checkIssueTicket({
@@ -186,4 +186,35 @@ Make use below content is inserted into the merge request description.
 # Checklist
 
 - [ ] Manually tested in a web browser
+```
+
+### checkSize
+
+Encourage smaller merge request.
+
+```typescript
+import { checkSize } from "danger-plugin-gitlab";
+
+checkSize({
+  logType: "fail",
+  maxSize: 20,
+  logMessage: ({ createdFiles, modifiedFiles }) =>
+    `This MR contains ${[...createdFiles, ...modifiedFiles].length} files (${
+      createdFiles.length
+    } new, ${
+      modifiedFiles.length
+    } modified). Consider splitting it into multiple MRs.`,
+  enableSkip: false,
+  skipMessage: "Skip MR size check",
+});
+```
+
+If `enableSkip` is set `true`, you can also add below content into your merge request template to control the behaviour.
+
+```markdown
+<!-- merge request template -->
+
+# Skip
+
+- [x] Skip MR size check
 ```
