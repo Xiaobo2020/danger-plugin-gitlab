@@ -86,7 +86,36 @@ describe("lockfile", () => {
       });
       checkLockfile();
       expect(mockLogger).toHaveBeenCalledWith(
-        "Lockfile (package-lock.json) has been updated, but no dependencies (package.json) have changed."
+        "Lockfile (`package-lock.json`) has been updated, but no dependencies (`package.json`) have changed."
+      );
+    });
+
+    it("only default lockfile modified with custom log message (string type)", () => {
+      (getDanger as Mock).mockReturnValue({
+        git: {
+          modified_files: ["a.txt", "package-lock.json"],
+        },
+      });
+      checkLockfile({
+        logMessage: "custom log message",
+      });
+      expect(mockLogger).toHaveBeenCalledWith("custom log message");
+    });
+
+    it("only default lockfile modified with custom log message (function type)", () => {
+      (getDanger as Mock).mockReturnValue({
+        git: {
+          modified_files: ["a.txt", "package-lock.json"],
+        },
+      });
+      checkLockfile({
+        logMessage: (isPkgMissing: boolean) =>
+          isPkgMissing
+            ? "custom log message for pkg missing"
+            : "custom log message for pkgLock missing",
+      });
+      expect(mockLogger).toHaveBeenCalledWith(
+        "custom log message for pkg missing"
       );
     });
 
@@ -101,7 +130,42 @@ describe("lockfile", () => {
 
       await checkLockfile();
       expect(mockLogger).toHaveBeenCalledWith(
-        "Dependencies (package.json) may have changed, but lockfile (package-lock.json) has not been updated."
+        "Dependencies (`package.json`) may have changed, but lockfile (`package-lock.json`) has not been updated."
+      );
+    });
+
+    it("only dependencies modified with custom log message (string type)", async () => {
+      (getDanger as Mock).mockReturnValue({
+        git: {
+          modified_files: ["a.txt", "package.json"],
+        },
+      });
+
+      (getAddedLines as Mock).mockReturnValue([6, 9]);
+
+      await checkLockfile({
+        logMessage: "custom log message",
+      });
+      expect(mockLogger).toHaveBeenCalledWith("custom log message");
+    });
+
+    it("only dependencies modified with custom log message (function type)", async () => {
+      (getDanger as Mock).mockReturnValue({
+        git: {
+          modified_files: ["a.txt", "package.json"],
+        },
+      });
+
+      (getAddedLines as Mock).mockReturnValue([6, 9]);
+
+      await checkLockfile({
+        logMessage: (isPkgMissing: boolean) =>
+          isPkgMissing
+            ? "custom log message for pkg missing"
+            : "custom log message for pkgLock missing",
+      });
+      expect(mockLogger).toHaveBeenCalledWith(
+        "custom log message for pkgLock missing"
       );
     });
 
@@ -116,7 +180,7 @@ describe("lockfile", () => {
 
       await checkLockfile({ path: "packages/server/" });
       expect(mockLogger).toHaveBeenCalledWith(
-        "Dependencies (packages/server/package.json) may have changed, but lockfile (packages/server/package-lock.json) has not been updated."
+        "Dependencies (`packages/server/package.json`) may have changed, but lockfile (`packages/server/package-lock.json`) has not been updated."
       );
     });
 
@@ -128,7 +192,7 @@ describe("lockfile", () => {
       });
       checkLockfile({ path: "packages/server/" });
       expect(mockLogger).toHaveBeenCalledWith(
-        "Lockfile (packages/server/package-lock.json) has been updated, but no dependencies (packages/server/package.json) have changed."
+        "Lockfile (`packages/server/package-lock.json`) has been updated, but no dependencies (`packages/server/package.json`) have changed."
       );
     });
   });
