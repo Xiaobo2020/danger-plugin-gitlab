@@ -33,7 +33,7 @@ checkChangelog();
 ## Plugins
 
 - [x] [addLabel](./src/libs/addLabel/index.md)
-- [ ] [checkAutomatedTest](./src/libs/checkAutomatedTest/index.md)
+- [x] [checkAutomatedTest](./src/libs/checkAutomatedTest/index.md)
 - [ ] [checkChangelog](./src/libs/checkChangelog/index.md)
 - [ ] [checkDescription](./src/libs/checkDescription/index.md)
 - [ ] [checkIssue](./src/libs/checkIssue/index.md)
@@ -54,4 +54,32 @@ addLabel([
   { match: /packages\/server\/.*/, name: "server" },
   { match: /packages\/webapp\/.*/, name: "webapp" },
 ]);
+```
+
+### checkAutomatedTest
+
+Check if source files have been modified, but not test files.
+
+```javascript
+import { checkAutomatedTest } from "danger-plugin-gitlab";
+
+checkAutomatedTest({
+  logType: "fail",
+  logMessage:
+    "Source files have been modified, but no test files have been added or modified.",
+  sourceFileMath: /src\/.*.(?<!test.)(js|ts|jsx|tsx)$/,
+  testFileMath: /src\/.*test.*(js|ts|jsx|tsx)$/,
+  enableCheck: false,
+  checkMessage: "Automated tests added/updated",
+});
+```
+
+If `enableCheck` is set `true`, you can also add below content into your merge request template to control the behaviour.
+
+```markdown
+<!-- gitlab mr template -->
+
+# Checklist
+
+- [x] Automated tests added/updated
 ```
