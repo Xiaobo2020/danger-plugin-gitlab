@@ -8,9 +8,9 @@ const DEFAULT_LOCKFILE = "package-lock.json";
 const DEFAULT_PATH = "";
 
 const getPkgLockMissingLogMessage = (pkg: string, pkgLock: string) =>
-  `Dependencies (${pkg}) may have changed, but lockfile (${pkgLock}) has not been updated.`;
+  `Dependencies (\`${pkg}\`) may have changed, but lockfile (\`${pkgLock}\`) has not been updated.`;
 const getPkgMissingLogMesssage = (pkg: string, pkgLock: string) =>
-  `Lockfile (${pkgLock}) has been updated, but no dependencies (${pkg}) have changed.`;
+  `Lockfile (\`${pkgLock}\`) has been updated, but no dependencies (\`${pkg}\`) have changed.`;
 
 const hasDepsChanged = (
   startLine: number,
@@ -50,16 +50,24 @@ const checkMissingPkg = ({
   pkgLock,
   pkgChanged,
   pkgLockChanged,
+  logMessage,
 }: {
   logType: LogType;
   pkg: string;
   pkgLock: string;
   pkgChanged: boolean;
   pkgLockChanged: boolean;
+  logMessage?: string | ((isPkgMissing: boolean) => string);
 }) => {
   if (!pkgChanged && pkgLockChanged) {
     const logger = getLogger(logType as any);
-    logger(getPkgMissingLogMesssage(pkg, pkgLock));
+    const msg =
+      logMessage === undefined
+        ? getPkgMissingLogMesssage(pkg, pkgLock)
+        : typeof logMessage === "string"
+        ? logMessage
+        : String(logMessage(true));
+    logger(msg);
   }
 };
 
@@ -69,12 +77,14 @@ const checkMissingPkgLock = async ({
   pkgLock,
   pkgChanged,
   pkgLockChanged,
+  logMessage,
 }: {
   logType: LogType;
   pkg: string;
   pkgLock: string;
   pkgChanged: boolean;
   pkgLockChanged: boolean;
+  logMessage?: string | ((isPkgMissing: boolean) => string);
 }) => {
   if (pkgChanged && !pkgLockChanged) {
     const processPath = process.cwd();
@@ -94,7 +104,13 @@ const checkMissingPkgLock = async ({
 
     if (depsChanged || devDepsChanged) {
       const logger = getLogger(logType as any);
-      logger(getPkgLockMissingLogMessage(pkg, pkgLock));
+      const msg =
+        logMessage === undefined
+          ? getPkgLockMissingLogMessage(pkg, pkgLock)
+          : typeof logMessage === "string"
+          ? logMessage
+          : String(logMessage(false));
+      logger(msg);
     }
   }
 };
@@ -103,6 +119,7 @@ type Options = {
   logType?: LogType;
   lockfile?: string;
   path?: string;
+  logMessage?: string | ((isPkgMissing: boolean) => string);
 };
 
 /**
@@ -113,6 +130,7 @@ const checkLockfile = async (options: Options = {}) => {
     logType = DEFAULT_LOG_TYPE,
     lockfile = DEFAULT_LOCKFILE,
     path = DEFAULT_PATH,
+    logMessage,
   } = options;
 
   const {
@@ -136,6 +154,7 @@ const checkLockfile = async (options: Options = {}) => {
     pkgLock,
     pkgChanged,
     pkgLockChanged,
+    logMessage,
   });
 
   await checkMissingPkgLock({
@@ -144,6 +163,7 @@ const checkLockfile = async (options: Options = {}) => {
     pkgLock,
     pkgChanged,
     pkgLockChanged,
+    logMessage,
   });
 };
 
