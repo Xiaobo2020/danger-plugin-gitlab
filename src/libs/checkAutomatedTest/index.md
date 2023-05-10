@@ -8,8 +8,8 @@ import { checkAutomatedTest } from "danger-plugin-gitlab";
 checkAutomatedTest();
 
 checkAutomatedTest({
-  sourceFileMath: /packages\/(webapp|server)\/.*.(?<!test.)(js|ts|jsx|tsx)$/,
-  testFileMath: /packages\/(webapp|server)\/.*test.*(js|ts|jsx|tsx)$/,
+  sourceFileMath: /src\/.*.(?<!test.)(js|ts|jsx|tsx)$/,
+  testFileMath: /src\/.*test.*(js|ts|jsx|tsx)$/,
 });
 ```
 

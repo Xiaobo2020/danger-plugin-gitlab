@@ -1,6 +1,6 @@
 {
   "name": "danger-plugin-gitlab",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Some simple but useful DangerJS plugins for Gitlab",
   "type": "module",
   "main": "./dist/libs/index.cjs",

@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, Mock, vi } from "vitest";
-import checkIssue from ".";
+import checkIssueTicket from ".";
 import { getDanger } from "../../utils";
 
 const mockLogger = vi.fn();
@@ -9,7 +9,7 @@ vi.mock("../../utils", () => ({
   getDanger: vi.fn(),
 }));
 
-describe("checkIssue", () => {
+describe("checkIssueTicket", () => {
   beforeEach(() => {
     vi.resetAllMocks();
   });
@@ -24,8 +24,8 @@ describe("checkIssue", () => {
           },
         },
       });
-      expect(() => checkIssue()).toThrowError(
-        "[checkIssue]: Missing key (e.g. 'JIRA')."
+      expect(() => checkIssueTicket()).toThrowError(
+        "[checkIssueTicket]: Missing key (e.g. 'JIRA')."
       );
     });
     it("invalid key input", () => {
@@ -37,8 +37,8 @@ describe("checkIssue", () => {
           },
         },
       });
-      expect(() => checkIssue({ key: "" })).toThrowError(
-        "[checkIssue]: Missing key (e.g. 'JIRA')."
+      expect(() => checkIssueTicket({ key: "" })).toThrowError(
+        "[checkIssueTicket]: Missing key (e.g. 'JIRA')."
       );
     });
     it("empty key list input", () => {
@@ -50,8 +50,8 @@ describe("checkIssue", () => {
           },
         },
       });
-      expect(() => checkIssue({ key: [] })).toThrowError(
-        "[checkIssue]: Missing key (e.g. 'JIRA')."
+      expect(() => checkIssueTicket({ key: [] })).toThrowError(
+        "[checkIssueTicket]: Missing key (e.g. 'JIRA')."
       );
     });
   });
@@ -66,7 +66,7 @@ describe("checkIssue", () => {
             },
           },
         });
-        checkIssue({
+        checkIssueTicket({
           key: "JIRA",
           location: "title",
         });
@@ -81,7 +81,7 @@ describe("checkIssue", () => {
             },
           },
         });
-        checkIssue({
+        checkIssueTicket({
           key: "JIRA",
           location: "title",
         });
@@ -98,7 +98,7 @@ describe("checkIssue", () => {
             },
           },
         });
-        checkIssue({
+        checkIssueTicket({
           key: "JIRA",
           location: "title",
         });
@@ -115,7 +115,7 @@ describe("checkIssue", () => {
             },
           },
         });
-        checkIssue({
+        checkIssueTicket({
           key: ["JIRA", "IDEV"],
           location: "title",
         });
@@ -136,7 +136,7 @@ describe("checkIssue", () => {
             },
           },
         });
-        checkIssue({
+        checkIssueTicket({
           key: "JIRA",
           location: "description",
         });
@@ -151,7 +151,7 @@ describe("checkIssue", () => {
             },
           },
         });
-        checkIssue({
+        checkIssueTicket({
           key: "JIRA",
           location: "description",
         });
@@ -168,7 +168,7 @@ describe("checkIssue", () => {
             },
           },
         });
-        checkIssue({
+        checkIssueTicket({
           key: "JIRA",
           location: "description",
         });
@@ -185,7 +185,7 @@ describe("checkIssue", () => {
             },
           },
         });
-        checkIssue({
+        checkIssueTicket({
           key: ["JIRA", "IDEV"],
           location: "description",
         });
