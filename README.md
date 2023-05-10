@@ -1,6 +1,6 @@
 # Danger Plugins For GitLab
 
-> Some simple but useful DangerJS plugins for Gitlab
+Some simple but useful DangerJS plugins for Gitlab
 
 ## Install
 
@@ -32,21 +32,26 @@ checkChangelog();
 
 ## Plugins
 
-- [addLabel](./src/libs/addLabel/index.md)
-- [checkAutomatedTest](./src/libs/checkAutomatedTest/index.md)
-- [checkChangelog](./src/libs/checkChangelog/index.md)
-- [checkDescription](./src/libs/checkDescription/index.md)
-- [checkIssue](./src/libs/checkIssue/index.md)
-- [checkLockfile](./src/libs/checkLockfile/index.md)
-- [checkManuallyTested](./src/libs/checkManuallyTested/index.md)
-- [checkMutexUpdate](./src/libs/checkMutexUpdate/index.md)
-- [checkSelfReview](./src/libs/checkSelfReview/index.md)
-- [checkSize](./src/libs/checkSize/index.md)
+- [x] [addLabel](./src/libs/addLabel/index.md)
+- [ ] [checkAutomatedTest](./src/libs/checkAutomatedTest/index.md)
+- [ ] [checkChangelog](./src/libs/checkChangelog/index.md)
+- [ ] [checkDescription](./src/libs/checkDescription/index.md)
+- [ ] [checkIssue](./src/libs/checkIssue/index.md)
+- [ ] [checkLockfile](./src/libs/checkLockfile/index.md)
+- [ ] [checkManuallyTested](./src/libs/checkManuallyTested/index.md)
+- [ ] [checkMutexUpdate](./src/libs/checkMutexUpdate/index.md)
+- [ ] [checkSelfReview](./src/libs/checkSelfReview/index.md)
+- [ ] [checkSize](./src/libs/checkSize/index.md)
 
-## Deploy
+### addLabel
 
-```bash
-npm install --registry=https://registry.npmjs.org/
+Add labels according to the changed files.
 
-npm publish
+```typescript
+import { addLabel } from "danger-plugin-gitlab";
+
+addLabel([
+  { match: /packages\/server\/.*/, name: "server" },
+  { match: /packages\/webapp\/.*/, name: "webapp" },
+]);
 ```
