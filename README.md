@@ -130,11 +130,15 @@ checkLockfile({
   lockfile: "package-lock.json",
 });
 
-// or custom log type, path and lockfile
+// or custom log type, path, lockfile and logMessage
 checkLockfile({
   lockType: "fail",
   lockfile: "yarn.lock",
   path: "packages/webapp/",
+  logMessage: (isPkgLockMissing: boolean) =>
+    isPkgLockMissing
+      ? `Dependencies (\`packages/webapp/package.json\`) may have changed, but lockfile (\`packages/webapp/yarn.lock\`) has not been updated.`
+      : `Lockfile (\`packages/webapp/yarn.lock\`) has been updated, but no dependencies (\`packages/webapp/package.json\`) have changed.`,
 });
 ```
 
