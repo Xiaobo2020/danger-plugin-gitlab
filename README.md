@@ -40,7 +40,7 @@ checkChangelog();
 - [checkLockfile](#checklockfile)
 - [checkManuallyTested](#checkmanuallytested)
 - [ ] [checkMutexUpdate](./src/libs/checkMutexUpdate/index.md)
-- [ ] [checkSelfReview](./src/libs/checkSelfReview/index.md)
+- [checkSelfReview](#checkselfreview)
 - [checkSize](#checksize)
 
 ### addLabel
@@ -186,6 +186,31 @@ Make use below content is inserted into the merge request description.
 # Checklist
 
 - [ ] Manually tested in a web browser
+```
+
+### checkSelfReview
+
+Check if author has reviewed their code.
+
+```typescript
+import { checkSelfReview } from "danger-plugin-gitlab";
+
+checkSelfReview({
+  logType: "warn",
+  logMessage:
+    "`Code has been reviewed by the author` is unchecked in the MR description.",
+  checkMessage: "Code has been reviewed by the author",
+});
+```
+
+Make use below content or custom check message is inserted into the merge request description.
+
+```markdown
+<!-- merge request template -->
+
+# Checklist
+
+- [ ] Code has been reviewed by the author
 ```
 
 ### checkSize
