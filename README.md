@@ -35,8 +35,8 @@ checkChangelog();
 - [addLabel](#addlabel)
 - [checkAutomatedTest](#checkautomatedtest)
 - [checkChangelog](#checkchangelog)
-- [ ] [checkDescription](./src/libs/checkDescription/index.md)
-- [ ] [checkIssue](./src/libs/checkIssue/index.md)
+- [checkDescription](#checkdescription)
+- [checkIssueTicket](#checkissueticket)
 - [ ] [checkLockfile](./src/libs/checkLockfile/index.md)
 - [ ] [checkManuallyTested](./src/libs/checkManuallyTested/index.md)
 - [ ] [checkMutexUpdate](./src/libs/checkMutexUpdate/index.md)
@@ -110,4 +110,33 @@ If `enableSkip` is set `true`, you can also add below content into your merge re
 # Skip
 
 - [x] Skip CHANGELOG check
+```
+
+### checkDescription
+
+Make sure each merge request has a detailed description.
+
+```typescript
+import { checkDescription } from "danger-plugin-gitlab";
+
+checkDescription({
+  logType: "message",
+  minLength: 50,
+  logMessage: "Please provide a summary in the merge request description.",
+});
+```
+
+### checkIssueTicket
+
+Check if an ISSUE ticket exists in the title or description of merge request template. Or add `NO-ISSUE` to indicate no issue ticket is required.
+
+```javascript
+import { checkIssueTicket } from "danger-plugin-gitlab";
+
+checkIssueTicket({
+  logType: "warn",
+  key: "JIRA",
+  location: "title",
+  logMessage: `Please include a ticket (like \`XXX-DDDD\` or \`NO-ISSUE\` if there is no ticket) at the beginning of the MR title`;
+});
 ```

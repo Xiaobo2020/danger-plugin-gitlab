@@ -1,5 +1,4 @@
-import { getLogger, LogType } from "../../utils";
-import { getDanger } from "../../utils";
+import { getDanger, getLogger, LogType } from "../../utils";
 
 const DEFAULT_LOG_TYPE = "warn";
 const getDefaultLogMessage = (location: IssueLocation) =>
@@ -16,7 +15,7 @@ type Options = {
   location?: IssueLocation;
 };
 
-const checkIssue = (options: Options = { key: "" }) => {
+const checkIssueTicket = (options: Options = { key: "" }) => {
   const {
     key,
     logType = DEFAULT_LOG_TYPE,
@@ -25,7 +24,7 @@ const checkIssue = (options: Options = { key: "" }) => {
   } = options;
 
   if (!key || key.length === 0) {
-    throw new Error("[checkIssue]: Missing key (e.g. 'JIRA').");
+    throw new Error("[checkIssueTicket]: Missing key (e.g. 'JIRA').");
   }
 
   const {
@@ -58,4 +57,4 @@ const checkIssue = (options: Options = { key: "" }) => {
   return;
 };
 
-export default checkIssue;
+export default checkIssueTicket;
