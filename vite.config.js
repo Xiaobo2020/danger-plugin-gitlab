@@ -26,7 +26,7 @@ export default defineConfig({
       ],
     },
     rollupOptions: {
-      external: ["node:fs"],
+      external: ["node:fs", "node:path"],
       output: {
         preserveModules: true,
       },

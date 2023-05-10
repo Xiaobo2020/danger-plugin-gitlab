@@ -1,4 +1,5 @@
 import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import type { LogType } from "../../utils";
 import { getAddedLines, getDanger, getLogger } from "../../utils";
 
@@ -76,7 +77,9 @@ const checkMissingPkgLock = async ({
   pkgLockChanged: boolean;
 }) => {
   if (pkgChanged && !pkgLockChanged) {
-    const pkgContent = readFileSync(pkg).toString();
+    const processPath = process.cwd();
+    const pkgPath = join(processPath, pkg);
+    const pkgContent = readFileSync(pkgPath).toString();
 
     const [depsStart, depsEnd] = lineRange(pkgContent, /"dependencies": {/);
     const [devDepsStart, devDepsEnd] = lineRange(

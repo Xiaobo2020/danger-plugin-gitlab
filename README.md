@@ -37,7 +37,7 @@ checkChangelog();
 - [checkChangelog](#checkchangelog)
 - [checkDescription](#checkdescription)
 - [checkIssueTicket](#checkissueticket)
-- [ ] [checkLockfile](./src/libs/checkLockfile/index.md)
+- [checkLockfile](#checklockfile)
 - [ ] [checkManuallyTested](./src/libs/checkManuallyTested/index.md)
 - [ ] [checkMutexUpdate](./src/libs/checkMutexUpdate/index.md)
 - [ ] [checkSelfReview](./src/libs/checkSelfReview/index.md)
@@ -138,5 +138,26 @@ checkIssueTicket({
   key: "JIRA",
   location: "title",
   logMessage: `Please include a ticket (like \`XXX-DDDD\` or \`NO-ISSUE\` if there is no ticket) at the beginning of the MR title`;
+});
+```
+
+### checkLockfile
+
+- Make sure the `package-lock.json` (or `yarn.lock`) is up to date when changes were made to `package.json`.
+- Check if only `package-lock.json` (or `yarn.lock`) was modified with `package.json` no changed.
+
+```typescript
+import { checkLockfile } from "danger-plugin-gitlab";
+
+checkLockfile({
+  lockType: "warn",
+  lockfile: "package-lock.json",
+});
+
+// or custom path and lockfile
+checkLockfile({
+  lockType: "fail",
+  lockfile: "yarn.lock",
+  path: "packages/webapp/",
 });
 ```
